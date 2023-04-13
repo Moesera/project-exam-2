@@ -2,9 +2,9 @@
 
 function Home() {
   return (
-    <div className="text-2xl font-bold underline">
+    <h1 className="text-2xl font-bold underline">
       Home
-    </div>
+    </h1>
   )
 }
 
