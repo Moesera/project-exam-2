@@ -32,6 +32,7 @@ const GlobalStyle = createGlobalStyle`
   }
   
   body {
+    font-family: var(--font-inter);
     font-size: 1.6rem;
     margin: 0;
     padding: 0;
