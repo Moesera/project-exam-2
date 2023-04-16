@@ -38,6 +38,10 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  main {
+    min-height: 100vh;
+  }
+
   li {
     list-style: none;
   }

@@ -3,16 +3,18 @@
 
 function Categories({ categories }) {
   return (
-    <ul className="flex gap-6 font-inder">
+    <div className="overflow-auto w-3.5/7">
+    <ul className="flex gap-2 overflow-auto font-inder">
       {categories.map((category) => {
         return (
-          <li key={category.id} className="flex flex-col items-center">
+          <li key={category.id} className="flex flex-col items-center grow min-w-[6rem] max-w-[6rem] p-1 rounded-lg hover:cursor-pointer hover:shadow-inner">
             <img className="w-14" src={category.image} alt={category.title}/>
-            <p>{category.title}</p>
+            <p className="text-base">{category.title}</p>
           </li>
         )
       })}
     </ul>
+    </div>
   )
 }
 
