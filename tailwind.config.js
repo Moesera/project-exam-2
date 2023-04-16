@@ -7,9 +7,9 @@ module.exports = {
       inter: ["Inter", "sans-serif"],
     },
     color: {
-      "pale-white": "#FDFDFD",
+      pale: "#FDFDFD",
       gray: "#CBCBCB",
-      "stone-gray": "#D8D8D8",
+      stone: "#D8D8D8",
       green: "#94EF69",
       red: "#CD3C3C",
       blue: "#1C6ECD",
