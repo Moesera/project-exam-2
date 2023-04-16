@@ -13,7 +13,7 @@ function Nav() {
   return (
     <>
     
-      <section className="flex w-3.5/7 items-center">
+    <section className="flex w-3.5/7 items-center">
         <input className="pl-20 h-16.5 border rounded-full border-stone-grey w-full shadow-md" type="text" placeholder="Search venues" />
         <label className="absolute flex justify-between w-3.5/7 pl-6 pr-6 items-center">
           <div>
