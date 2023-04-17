@@ -1,6 +1,6 @@
 function Categories({ categories }) {
   return (
-    <div className="overflow-auto w-3.5/7">
+    <div className="overflow-auto">
       <ul className="flex gap-4 overflow-auto font-inder">
         {categories.map((category) => {
           return (
