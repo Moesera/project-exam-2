@@ -32,9 +32,15 @@ const GlobalStyle = createGlobalStyle`
   }
   
   body {
+    background: #FDFDFD;
+    font-family: var(--font-inter);
     font-size: 1.6rem;
     margin: 0;
     padding: 0;
+  }
+
+  main {
+    min-height: 100vh;
   }
 
   li {
