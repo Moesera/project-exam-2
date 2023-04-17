@@ -2,17 +2,25 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    screens: {
+      "x-sm": "340px",
+      "sm": "640px",
+      "md": "768px",
+      "lg": "1024px",
+      "xl": "1280px",
+      "2xl": "1536px",
+    },
     fontFamily: {
       inder: ["Inder", "sans-serif"],
       inter: ["Inter", "sans-serif"],
     },
     color: {
-      pale: "#FDFDFD",
-      gray: "#CBCBCB",
-      stone: "#D8D8D8",
-      green: "#94EF69",
-      red: "#CD3C3C",
-      blue: "#1C6ECD",
+      "white": "#FDFDFD",
+      "light-gray": "#CBCBCB",
+      "gray": "#D8D8D8",
+      "success": "#94EF69",
+      "error": "#CD3C3C",
+      "blue-ocean": "#1C6ECD",
     },
     extend: {
       spacing: {
