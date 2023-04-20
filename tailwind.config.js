@@ -14,13 +14,13 @@ module.exports = {
       inder: ["Inder", "sans-serif"],
       inter: ["Inter", "sans-serif"],
     },
-    color: {
+    colors: {
       "white": "#FDFDFD",
       "light-gray": "#CBCBCB",
       "gray": "#D8D8D8",
       "success": "#94EF69",
       "error": "#CD3C3C",
-      "blue-ocean": "#1C6ECD",
+      "ocean": "#1C6ECD",
     },
     extend: {
       spacing: {
@@ -30,6 +30,9 @@ module.exports = {
         "4/7": "85%",
         "5/7": "95%",
         "11/12": "90%",
+      },
+      aspectRatio: {
+        "3/2": "3 / 2",
       },
     },
   },
