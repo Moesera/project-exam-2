@@ -3,7 +3,7 @@
 
 function Footer() {
   return (
-    <footer className="bg-neutral-400 pb-36">
+    <footer className="pb-[20rem] bg-light-gray">
       <p>Copy right claimed på Sigvel</p>
     </footer>
   )
