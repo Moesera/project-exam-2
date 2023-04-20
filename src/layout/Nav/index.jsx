@@ -25,7 +25,7 @@ function Nav() {
           <img className="w-9" src={FilterIcon} alt="filter" />
         </div>
         {/* Navbar */}
-        <nav className="fixed md:static md:w-2/4 inset-x-0 bottom-0 flex self-center justify-center p-4 md:p-0 border md:border-none border-stone-300 font-inder bg-[#FDFDFD]">
+        <nav className="fixed inset-x-0 bottom-0 flex self-center justify-center p-4 bg-white border md:static md:w-2/4 md:p-0 md:border-none border-light-gray font-inder">
           <ul className="flex justify-between w-11/12 m-auto md:gap-4 md:justify-end x-sm:w-3/7 sm:w-3/5 md:w-full lg:gap-8">
             <li className="flex flex-col items-center min-w-[5rem] p-2 rounded-lg hover:cursor-pointer hover:shadow-inner">
               <img className="w-12" src={ExploreIcon} alt="explore img" />
