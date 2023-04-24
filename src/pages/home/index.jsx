@@ -4,7 +4,6 @@ function Home() {
   return (
     <main className="pt-72 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop">
       <h1 className="sr-only">Homepage</h1>
-
       <Venues />
     </main>
   );

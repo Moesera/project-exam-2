@@ -16,8 +16,6 @@ function Details() {
     return <div>Error</div>;
   }
 
-  console.log(data);
-
   return (
     <main>
       <h1>{data.name}</h1>
