@@ -14,7 +14,7 @@ function Nav() {
   return (
     <>
       {/* Search */}
-      <section className="flex w-3.5/7 items-center">
+      <section className="flex w-3.5/7 items-center xl:w-desktop">
         <input className="pl-20 h-16.5 border rounded-full border-stone-grey w-full shadow-md" type="text" placeholder="Search venues" />
         <label className="absolute flex items-center justify-between pl-6 pr-6">
           <div>
@@ -47,7 +47,7 @@ function Nav() {
         </nav>
       </section>
       {/* Categories */}
-      <section className="w-3.5/7 flex items-center gap-4">
+      <section className="w-3.5/7 flex items-center gap-4 xl:w-desktop">
         <Categories categories={categoryList} />
         <div className="hidden border rounded-full hover:shadow-inner hover:cursor-pointer md:block">
           <img className="w-12" src={ArrowIcon} alt="arrow right" />
