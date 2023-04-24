@@ -5,7 +5,7 @@ const handleImgError = (e) => {
   e.target.src = PlaceholderImg;
 };
 
-function ImageCollage({ images, name }) {
+function ShowcaseImage({ images, name }) {
     return (
       <div className="">
         <img className="object-cover shadow-lg aspect-3/2 rounded-xl" key={uuidv4()} src={images} onError={handleImgError} alt={name} />
@@ -13,4 +13,4 @@ function ImageCollage({ images, name }) {
     );
 }
 
-export default ImageCollage;
+export default ShowcaseImage;
