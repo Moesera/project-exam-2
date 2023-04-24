@@ -4,7 +4,7 @@ import Logo from "../../assets/images/logo/icons8-floating-island-beach-100.png"
 
 function Header() {
   return (
-    <header className="fixed inset-x-0 flex flex-col items-center justify-center gap-2 py-6 bg-white shadow-md md:gap-4">
+    <header className="fixed inset-x-0 z-50 flex flex-col items-center justify-center gap-2 py-6 bg-white shadow-md md:gap-4">
       <div className="hidden w-24">
         <img src={Logo} alt="logo" />
       </div>
