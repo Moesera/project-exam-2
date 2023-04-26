@@ -1,17 +1,20 @@
+import { useLocation } from "react-router-dom";
+
 function LocationComponent({ location, id }) {
-  console.log(location);
+  const urlLocation = useLocation();
+
+  if (urlLocation.pathname === `/venue/${id}`) {
+    return (
+      <p>
+        Location: {location.address}, {location.city}, {location.country} {location.zip}
+      </p>
+    );
+  }
+
   return (
     <>
       {location && (
-        <div>
-          {Location.pathname === `/venue/${id}` ? (
-            <p>{location.continent}</p>
-          ) : (
-            <p>
-              {location.address}, {location.city}, {location.country} {location.zip}
-            </p>
-          )}
-        </div>
+          <p>{location.continent}</p>
       )}
     </>
   );
