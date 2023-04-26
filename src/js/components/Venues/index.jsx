@@ -23,7 +23,7 @@ console.log(data);
     <section className="grid grid-rows-1 gap-8 my-8 auto-rows-auto sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {data.map((venue) => {
         return (
-          <Link to={`/venue/${venue.id}`} key={venue.id} className="p-4 hover:bg-stone-200 rounded-xl hover:shadow-md">
+          <Link to={`/venue/${venue.id}`} key={venue.id} className="p-4 hover:bg-stone-200 rounded-xl hover:shadow-3xl">
             <ShowcaseImage images={venue.media[0]} name={venue.name} />
               <div className="flex items-center justify-between mt-2">
                 <h2 className="font-semibold sm:truncate">{venue.name}</h2>
