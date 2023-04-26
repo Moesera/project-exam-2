@@ -1,5 +1,7 @@
 import SliderComponent from "../Slider";
 import LocationComponent from "../Location";
+import CardComponent from "../Card";
+
 import StarIcon from "../../../assets/interface/icons8-star-32.png";
 
 function Venue({ venueData }) {
@@ -19,8 +21,8 @@ function Venue({ venueData }) {
           </span>
         </div>
 
-        <div className="flex flex-col gap-1">
-        <LocationComponent location={venueData.location}/>
+        <div className="flex flex-col gap-4">
+        <LocationComponent location={venueData.location} id={venueData.id}/>
           <p className="mb-3">{venueData.updated}</p>
           <p>{venueData.description}</p>
 
@@ -34,6 +36,10 @@ function Venue({ venueData }) {
                 <button className="px-4 py-2 font-medium text-white rounded-xl bg-ocean">Book venue</button>
               </form>
             </div>
+          </section>
+          
+          <section className="w-full mt-20">
+            <CardComponent elements={venueData.owner}/>
           </section>
         </div>
       </section>
