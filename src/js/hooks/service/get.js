@@ -26,7 +26,11 @@ export function useGet(url) {
     getData();
   }, [url]);
 
-  return { data, isLoading, isError };
+  if(data) {
+    return { data, isLoading, isError };
+  }
+
+  return
 }
 
 
