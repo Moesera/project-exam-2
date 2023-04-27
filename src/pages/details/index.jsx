@@ -16,12 +16,12 @@ function Details() {
     return <div>Error</div>;
   }
 
-  return (
-    <main>
-      <h1>{data.name}</h1>
-      <Venue venueData={data} />
-    </main>
-  );
+    return (
+      <main>
+        <h1>{data.name}</h1>
+        <Venue venueData={data} />
+      </main>
+    );
 }
 
 export default Details;

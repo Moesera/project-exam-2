@@ -14,7 +14,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="venue/:id" element={<Details />} />
-        <Route path="profile/:id" element={<Profile />} />
+        <Route path="profile/:name" element={<Profile />} />
         <Route path="*" element={<RouteNotFound />} />
         </Route>
       </Routes>

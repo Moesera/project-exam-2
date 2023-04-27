@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import ChevronRight from "../../../../assets/interface/icons8-chevron-right.png";
 import PlaceholderAvatar from "../../../../assets/images/placeholder/placeholder-profile.jpg";
 import { handleAvatarImgError } from "../../../helpers/placeholder";
@@ -14,18 +16,18 @@ function ProfileElements({ owner }) {
     }
   
     return (
-          <div className="flex items-center gap-4 p-4 rounded-lg shadow-3xl">
-            <figure className="w-[5.5rem]">
-              <img className="object-cover w-full h-full rounded-full" src={avatar} onError={handleAvatarImgError} alt="user avatar" />
+          <Link to={`/profile/${owner.name}`} className="flex items-center gap-4 px-4 py-6 rounded-lg shadow-3xl group/item">
+            <figure className="w-[4.5rem] h-[4.5rem] md-sm:w-[6rem] md-sm:h-[6rem]">
+              <img className="object-cover w-full h-full rounded-full shadow-3xl" src={avatar} onError={handleAvatarImgError} alt="user avatar" />
             </figure>
-            <div className="">
+            <div className="text-lg md-sm:text-2xl">
             <p className="font-bold">{owner.name}</p>
-            <p>Show profile</p>
+            <p className="group-hover/item:underline">Show profile</p>
             </div>
-            <div className="ml-auto">
+            <div className="ml-auto w-[2.5rem] md-sm:w-14 invisible group-hover/item:visible">
               <img src={ChevronRight} alt="arrow" />
             </div>
-          </div>
+          </Link>
     );
   }
 
