@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     screens: {
       "x-sm": "340px",
+      "md-sm": "450px",
       "sm": "640px",
       "md": "768px",
       "lg": "1024px",
@@ -14,13 +15,13 @@ module.exports = {
       inder: ["Inder", "sans-serif"],
       inter: ["Inter", "sans-serif"],
     },
-    color: {
+    colors: {
       "white": "#FDFDFD",
       "light-gray": "#CBCBCB",
       "gray": "#D8D8D8",
       "success": "#94EF69",
       "error": "#CD3C3C",
-      "blue-ocean": "#1C6ECD",
+      "ocean": "#1C6ECD",
     },
     extend: {
       spacing: {
@@ -30,7 +31,16 @@ module.exports = {
         "4/7": "85%",
         "5/7": "95%",
         "11/12": "90%",
+        "desktop": "100rem",
       },
+      aspectRatio: {
+        "3/2": "3 / 2",
+        "4/2": "4 / 2",
+      },
+      boxShadow: {
+        "3xl": "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;",
+        "inner": "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;"
+      }
     },
   },
   plugins: [],
