@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function useLogin(url) {
   const [isSuccess, setIsSuccess] = useState(false)
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(null);
 
-  useEffect(() => {
-    async function login(email, username, password) {
+    async function login( email, password) {
       try {
         setIsLoading(true);
         setIsError(false);
@@ -14,7 +13,7 @@ function useLogin(url) {
 
         const res = await fetch(url, {
           method: "POST",
-          body: JSON.stringify({ email, username, password }),
+          body: JSON.stringify({ email, password }),
           headers: {
             "Content-Type": "application/json",
           },
@@ -36,12 +35,7 @@ function useLogin(url) {
       }
     }
 
-    login();
-  }, [url]);
-
-  if(isSuccess) {
-    return {isSuccess, isLoading, isError};
-  }
+    return { login, isSuccess, isLoading, isError };
 }
 
 export default useLogin;
