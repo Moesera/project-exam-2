@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { openModal } from "../../js/helpers/modal";
 
+// images
 import SearchIcon from "../../assets/interface/icons8-search-30.png";
 import FilterIcon from "../../assets/interface/icons8-tune-50.png";
 import BookingIcon from "../../assets/interface/icons8-booking-80.png";
@@ -7,40 +10,50 @@ import ExploreIcon from "../../assets/interface/icons8-compass-64.png";
 import ProfileIcon from "../../assets/interface/icons8-male-user-64.png";
 import ArrowIcon from "../../assets/interface/icons8-chevron-right.png";
 
+// components
 import { categoryList } from "../../js/components/Categories/list";
 import Categories from "../../js/components/Categories";
+import PopupModal from "../../js/components/Modal/index";
+import RegisterForm from "../../js/components/Register";
+import LoginForm from "../../js/components/Login";
 
 function Nav() {
+  const [components, setComponents] = useState([LoginForm, RegisterForm]);
+  const [open, setOpen] = useState(false);
+  const [showLogin, setShowLogin] = useState(true);
+
   return (
     <>
+      <PopupModal show={showLogin} setShow={setShowLogin} components={components} setComponents={setComponents} setOpen={setOpen} open={open} />
       {/* Search */}
       <section className="flex w-3.5/7 items-center xl:w-desktop">
-        <input className="pl-20 h-16.5 border rounded-full border-stone-grey w-full shadow-md" type="text" placeholder="Search venues" />
-        <label className="absolute flex items-center justify-between pl-6 pr-6">
-          <div>
-            <img className="w-10" src={SearchIcon} alt="search" />
+          <input className="pl-20 h-16.5 border rounded-full border-stone-grey w-full shadow-md" type="text" placeholder="Search venues" />
+          <label className="absolute flex items-center justify-between pl-6 pr-6">
+            <div>
+              <img className="w-10" src={SearchIcon} alt="search" />
+            </div>
+          </label>
+          <div className="absolute p-2 border rounded-full right-[12%] hover:shadow-inner hover:cursor-pointer md:hidden">
+            <img className="w-9" src={FilterIcon} alt="filter" />
           </div>
-        </label>
-        <div className="absolute p-2 border rounded-full right-[12%] hover:shadow-inner hover:cursor-pointer md:hidden">
-          <img className="w-9" src={FilterIcon} alt="filter" />
-        </div>
         {/* Navbar */}
         <nav className="fixed inset-x-0 bottom-0 flex self-center justify-center p-4 bg-white border md:static md:w-2/4 md:p-0 md:border-none border-light-gray font-inder">
           <ul className="flex justify-between w-11/12 m-auto md:gap-4 md:justify-end x-sm:w-3/7 sm:w-3/5 md:w-full lg:gap-8">
             <li className="min-w-[5rem] p-2 rounded-lg hover:cursor-pointer hover:shadow-inner">
-            <Link to="/" className="flex flex-col items-center text-base">
-              <img className="w-12" src={ExploreIcon} alt="explore img" />
+              <Link to="/" className="flex flex-col items-center text-base">
+                <img className="w-12" src={ExploreIcon} alt="explore img" />
                 Explore
               </Link>
             </li>
             <li className="min-w-[5rem] p-2 rounded-lg hover:cursor-pointer hover:shadow-inner">
-            <Link className="flex flex-col items-center text-base">
-              <img className="w-12" src={BookingIcon} alt="bookings img" />
-              Bookings</Link>
+              <Link className="flex flex-col items-center text-base">
+                <img className="w-12" src={BookingIcon} alt="bookings img" />
+                Bookings
+              </Link>
             </li>
             <li className="min-w-[5rem] p-2 rounded-lg hover:cursor-pointer hover:shadow-inner">
-            <Link to="/profile" className="flex flex-col items-center text-base ">
-              <img className="w-12" src={ProfileIcon} alt="profile img" />
+              <Link onClick={() => openModal({ setOpen })} className="flex flex-col items-center text-base ">
+                <img className="w-12" src={ProfileIcon} alt="profile img" />
                 Profile
               </Link>
             </li>
