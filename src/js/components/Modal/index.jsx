@@ -1,6 +1,6 @@
 import Modal from "react-responsive-modal";
 
-import { openModal, closeModal } from "../../helpers/modal";
+import { closeModal } from "../../helpers/modal";
 
 /**
  * popup modal.
@@ -39,6 +39,10 @@ export default function PopupModal({ show, setShow, components, setComponents, s
   const LoginForm = components[0];
   const RegisterForm = components[1];
 
+  if(!open) {
+    return null
+  }
+  
   return (
     <div>
       {/* This should stay in the popupModal component */}
@@ -46,7 +50,7 @@ export default function PopupModal({ show, setShow, components, setComponents, s
       overlay: "fixed inset-0 bottom-[7.6rem] bg-white bg-opacity-50", 
       modal: "fixed bg-white inset-0 bottom-[7.6rem] w-full z-50"}}
       open={open} onClose={() => closeModal({ setOpen })} showCloseIcon={false} center>
-        {show ? <LoginForm setShow={setShow} setOpen={{ setOpen }} /> : <RegisterForm setShowLogin={setShow} setOpen={setOpen} />}
+        {show ? <LoginForm setShow={setShow} setOpen={setOpen} /> : <RegisterForm setShow={setShow} setOpen={setOpen} />}
       </Modal>
     </div>
   );

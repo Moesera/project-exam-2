@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import useRegister from "./../../hooks/service/register";
 import NewAvatar from "./NewAvatar";
+
+import { register } from "../../helpers/constant";
+import { closeModal } from "../../helpers/modal";
 
 import AvatarPlaceholder from "../../../assets/images/placeholder/placeholder-profile.jpg";
 import AddIcon from "../../../assets/interface/icons8-add-50.png";
@@ -12,73 +15,136 @@ function increment({ setCount, count }) {
   setCount(count + 1);
 }
 
-function RegisterForm() {
+const url = register;
+
+function RegisterForm({ setShow, setOpen }) {
   const [count, setCount] = useState(0);
-  // Update the avatars to render out and display on the page
-  const [avatars, setAvatars] = useState([]);
-  
+  const avatarContainerRef = useRef(null);
   const [isHidden, setIsHidden] = useState(true);
+  const [imageUrl, setImageUrl] = useState("");
+  const { register, isSuccess, isLoading, isError } = useRegister(url);
+
+  const [avatars, setAvatars] = useState([]);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [isManager, setIsManager] = useState(false);
+  const [chosenAvatar, setChosenAvatar] = useState(false);
   const [password, setPassword] = useState("");
-  const { isLoading, error } = useRegister();
 
-  function addImage(e) {
-    if (e.key === "Enter") {
-      // This is the new avatar image from the url input
-      const newAvatar = e.target.value;
-      increment({setCount, count});
-      //  Setting the new avatar into the avatar array
-      setAvatars([...avatars, newAvatar]);
+  const resetForm = useCallback(() => {
+    setAvatars("");
+    setUsername("");
+    setEmail("");
+    setIsManager("");
+    setChosenAvatar("");
+    setPassword("");
 
-      // addAvatar(avatar, {count, setCount});
-      e.target.value = '';
+    setTimeout(() => {
+      setShow(true);
+    }, 3000);
+  }, [setShow]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      resetForm();
     }
+  }, [isSuccess, resetForm]);
+
+
+  function addImage() {
+    // This is the new avatar image from the url input
+    const newAvatar = imageUrl;
+    increment({ setCount, count });
+    //  Setting the new avatar into the avatar array
+    setAvatars([...avatars, newAvatar]);
+
+    setImageUrl("");
+  }
+
+  function handleAvatarChange() {
+    const avatarRadioButtons = avatarContainerRef.current.querySelectorAll(`input[type="radio"][name="avatar"]`);
+    let chosenAvatarValue;
+    avatarRadioButtons.forEach((radioButton) => {
+      if (radioButton.checked) {
+        chosenAvatarValue = radioButton.value;
+      }
+    });
+    setChosenAvatar(chosenAvatarValue);
   }
 
   function setHidden() {
     setIsHidden(!isHidden);
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleSubmit(e) {
+    e.preventDefault();
 
-    console.log(event);
-    // register(username, email, password);
+    const form = e.target;
+    const managerRadio = form.elements["manager"];
+    setIsManager(managerRadio.checked);
+    const options = {
+      name: username,
+      email: email,
+      password: password,
+      avatar: chosenAvatar,
+      venueManager: isManager,
+    };
+    register(options);
   }
 
   return (
     <div className="flex flex-col justify-center min-h-full">
+      <div className="mx-auto w-4/7">
+        <p onClick={() => closeModal({ setOpen, setShow })} className="mb-4 cursor-pointer">
+          Back
+        </p>
+      </div>
       <h2 className="w-11/12 mx-auto mb-12 text-4xl font-medium text-center">create your account</h2>
       {/* Form start */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-5 mx-auto bg-white w-4/7">
         <label className="flex flex-col font-inder">
           Username
-          <input className="p-2 border rounded-lg" type="text" value={username} onChange={(event) => setUsername(event.target.value)} minLength={4} required/>
+          <input
+            className="p-2 border rounded-lg"
+            type="text"
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+            minLength={4}
+            autoComplete="username"
+            required
+          />
         </label>
         <label className="flex flex-col font-inder">
           Email
-          <input className="p-2 border rounded-lg" type="email" value={email} onChange={(event) => setEmail(event.target.value)} pattern=".+@stud\.noroff\.no" required/>
+          <input className="p-2 border rounded-lg" type="email" value={email} onChange={(event) => setEmail(event.target.value)} pattern="^[\w\-.]+@(stud.)?noroff.no$" required />
         </label>
         <label className="flex flex-col font-inder">
           Password
-          <input className="p-2 border rounded-lg" type="password" value={password} onChange={(event) => setPassword(event.target.value)} minLength={8} required/>
+          <input
+            className="p-2 border rounded-lg"
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            minLength={8}
+            autoComplete="current-password"
+            required
+          />
         </label>
         {/* Avatar */}
         <div className="flex flex-col font-inder">
           Avatar
-          <div id="avatarContainer" className="flex gap-4">
+          <div id="avatarContainer" ref={avatarContainerRef} className="flex gap-4" onChange={handleAvatarChange}>
             {/* Create this one again with the chosen image from the user
              on the button click bring up a popup to insert the url and then apply
              it to the component creating and depend it to the avatarContainer
              */}
             <label>
-              <input className="hidden" type="radio" id="preset" name="avatar" value="preset" />
+              <input className="hidden" type="radio" id="preset" name="avatar" value={AvatarPlaceholder} />
               <figure className="w-20 h-20 p-2 rounded-lg shadow-3xl hover:cursor-pointer hover:border hover:border-gray">
                 <img className="object-cover w-full h-full" src={AvatarPlaceholder} alt="placeholder" pattern="^(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?$" />
               </figure>
             </label>
-            <NewAvatar avatars={avatars} setAvatars={setAvatars} count={count} setCount={setCount}/>
+            <NewAvatar avatars={avatars} setAvatars={setAvatars} count={count} setCount={setCount} />
             {/*  */}
             {/* Add image button */}
             <button onClick={setHidden} id="addAvatar" type="button" className={`w-20 p-2 rounded-lg shadow-3xl hover:border hover:border-gray transition-opacity duration-300`}>
@@ -86,15 +152,25 @@ function RegisterForm() {
             </button>
             {/* End of image button */}
           </div>
-          <label className="mt-2">
+          <label className="flex gap-4 mt-2">
             <input
-              onKeyDown={addImage}
               id="imageUrl"
               className={`w-full p-2 border rounded-lg transition-opacity duration-300 ${isHidden ? "opacity-0" : "opacity-100"}`}
               type="url"
-              placeholder="url - press enter to confirm"
+              placeholder="enter your jpg url"
+              value={imageUrl}
+              onChange={(event) => setImageUrl(event.target.value)}
               pattern="^(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?$"
             />
+            <button
+              type="button"
+              onClick={addImage}
+              className={`shadow-3xl py-2 px-4 rounded-lg font-bold border border-white hover:cursor-pointer hover:border hover:border-gray ${
+                isHidden ? "opacity-0" : "opacity-100"
+              }`}
+            >
+              +
+            </button>
           </label>
         </div>
         {/* Avatar end */}
@@ -130,7 +206,8 @@ function RegisterForm() {
         <button className="p-2 border rounded-lg bg-success" type="submit" disabled={isLoading}>
           Register
         </button>
-        {error && <p>Error: {error.message}</p>}
+        {isError && <p className="error">Error: {isError}</p>}
+        {isSuccess && <div className="success">Account was successfully created</div>}
       </form>
     </div>
   );

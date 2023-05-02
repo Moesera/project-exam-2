@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 
 export function Auth() {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('apiAuth'));
+  // export this or set / get this in Nav to pass it down to the profile component
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
 
+  // maybe export a function like this for login and logout to set 
+  // login false and delete elements in local storage
   function handleLogin() {
     // Handle login
     setIsLoggedIn(true);
   }
 
+  // Use is logged in to render the this to the profile text.
   return (
     <div>
       {isLoggedIn ? (
@@ -25,6 +29,8 @@ export function Auth() {
   );
 }
 
+// use this to check for the urls that needs auth check, check the token
+// return the login modal or a toaster to notify the user that they need to login if not valid.
 export function checkAuthAndFetch(url) {
   const urlsThatRequireAuth = ['/data1', '/data2'];
   if (urlsThatRequireAuth.includes(url) && !localStorage.getItem('apiAuth')) {

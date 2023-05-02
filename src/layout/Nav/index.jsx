@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { openModal } from "../../js/helpers/modal";
+import { closeModal, openModal } from "../../js/helpers/modal";
 
 // images
 import SearchIcon from "../../assets/interface/icons8-search-30.png";
@@ -40,19 +40,19 @@ function Nav() {
         <nav className="fixed inset-x-0 bottom-0 flex self-center justify-center p-4 bg-white border md:static md:w-2/4 md:p-0 md:border-none border-light-gray font-inder">
           <ul className="flex justify-between w-11/12 m-auto md:gap-4 md:justify-end x-sm:w-3/7 sm:w-3/5 md:w-full lg:gap-8">
             <li className="min-w-[5rem] p-2 rounded-lg hover:cursor-pointer hover:shadow-inner">
-              <Link to="/" className="flex flex-col items-center text-base">
+              <Link onClick={() => closeModal({ setOpen, setShowLogin })} to="/" className="flex flex-col items-center text-base">
                 <img className="w-12" src={ExploreIcon} alt="explore img" />
                 Explore
               </Link>
             </li>
             <li className="min-w-[5rem] p-2 rounded-lg hover:cursor-pointer hover:shadow-inner">
-              <Link className="flex flex-col items-center text-base">
+              <Link onClick={() => closeModal({ setOpen, setShowLogin })} className="flex flex-col items-center text-base">
                 <img className="w-12" src={BookingIcon} alt="bookings img" />
                 Bookings
               </Link>
             </li>
             <li className="min-w-[5rem] p-2 rounded-lg hover:cursor-pointer hover:shadow-inner">
-              <Link onClick={() => openModal({ setOpen })} className="flex flex-col items-center text-base ">
+              <Link onClick={() => openModal({ setOpen, setShowLogin })} className="flex flex-col items-center text-base ">
                 <img className="w-12" src={ProfileIcon} alt="profile img" />
                 Profile
               </Link>

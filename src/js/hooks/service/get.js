@@ -35,6 +35,7 @@ export function useGet(url) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  
   useEffect(() => {
     async function getData() {
       try {
