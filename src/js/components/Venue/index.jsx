@@ -1,6 +1,6 @@
 import SliderComponent from "../Slider";
 import LocationComponent from "../Location";
-import CardComponent from "../Card";
+import ProfileCard from "./../Card/Profile";
 
 import StarIcon from "../../../assets/interface/icons8-star-32.png";
 
@@ -38,7 +38,7 @@ function Venue({ venueData }) {
           </section>
           
           <section className="w-full mt-20">
-            <CardComponent elements={venueData.owner}/>
+            <ProfileCard owner={venueData.owner}/>
           </section>
         </div>
       </section>

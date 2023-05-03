@@ -11,18 +11,30 @@ const handleImgError = (e) => {
 };
 
 function SliderComponent({ images, name }) {
+  if (images) {
+    if (images.length === 0) {
+      images = PlaceholderImg;
 
-  return (
-    <Swiper navigation={true} modules={[Navigation]} className="mySwiper shadow-3xl rounded-xl">
-      {Array.isArray(images) && images.map((image) => {
-        return (
-          <SwiperSlide key={uuidv4()} className="">
-            <img className="object-cover aspect-3/2 md:aspect-4/2 rounded-xl" src={image} onError={handleImgError} alt={name} />
-          </SwiperSlide>
+      return (
+        <div className="shadow-3xl rounded-xl">
+          <img className="object-cover aspect-3/2 md:aspect-4/2 rounded-xl" src={images} onError={handleImgError} alt={name} />
+        </div>
       );
-      })}
-    </Swiper>
-  );
+    }
+
+    return (
+      <Swiper navigation={true} modules={[Navigation]} className="mySwiper shadow-3xl rounded-xl">
+        {Array.isArray(images) &&
+          images.map((image) => {
+            return (
+              <SwiperSlide key={uuidv4()} className="">
+                <img className="object-cover aspect-3/2 md:aspect-4/2 rounded-xl" src={image} onError={handleImgError} alt={name} />
+              </SwiperSlide>
+            );
+          })}
+      </Swiper>
+    );
+  }
 }
 
 export default SliderComponent;

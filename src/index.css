@@ -2,3 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer components {
+  input[type="radio"]:checked ~ figure {
+    @apply border-2 border-ocean;
+  }
+
+  input[type="radio"]:checked ~ div {
+    @apply border-2 border-ocean;
+  }
+}

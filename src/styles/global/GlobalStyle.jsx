@@ -62,13 +62,16 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .error {
-    background: lightcoral;
+    text-align: center;
+    font-weight: 500;
+    background: lightpink;
     color: red;
     padding: 1rem;
     border-radius: 0.5rem;
   }
 
   .success {
+    text-align: center;
     background: lightgreen;
     color: green;
     padding: 1rem;
