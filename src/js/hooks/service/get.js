@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { checkAuthAndFetch } from "../../authentication/apiAuth";
+import { getItem } from "../../localStorage/getItem";
 
 /**
  * GET method for api fetch.
@@ -8,11 +10,11 @@ import { useState, useEffect } from "react";
  * ```
  * // imports
  * import { useGet } from "path/hooks/service/get";
- * 
- * 
+ *
+ *
  * function App() {
  * const { data, isLoading, isError } = useGet(apiUrl);
- * 
+ *
  * if (isLoading) {
  *   return <div>Loading</div>;
  * }
@@ -20,13 +22,13 @@ import { useState, useEffect } from "react";
  * if (isError) {
  *   return <div>Error</div>;
  * }
- * 
+ *
  * return (
  * <>
  *   <Component Prop={data}
  * </>
  * )
- * 
+ *
  * }
  * ```
  */
@@ -35,31 +37,44 @@ export function useGet(url) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  
+  const token = getItem("token");
+
+  const options = useMemo(() => {
+    return {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    };
+  }, [token]);
+
   useEffect(() => {
     async function getData() {
       try {
         setIsLoading(true);
         setIsError(false);
+        let dataResults;
 
-        const dataResults = await fetch(url);
+        if (checkAuthAndFetch(url)) {
+          dataResults = await fetch(url, options);
+        } else {
+          dataResults = await fetch(url);
+        }
+
         const json = await dataResults.json();
 
         setData(json);
-      } catch (err) {
-        console.log(err);
-        setIsError(true);
+      } catch (error) {
+        console.log(error);
+        setIsError(error);
       } finally {
         setIsLoading(false);
       }
     }
 
     getData();
-  }, [url]);
+  }, [url, options]);
 
-  if(data) {
+  if (data) {
     return { data, isLoading, isError };
   }
 }
-
-
