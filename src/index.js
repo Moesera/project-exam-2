@@ -7,13 +7,17 @@ import reportWebVitals from "./js/reportWebVitals";
 import "./index.css";
 import App from "./js/App";
 import GlobalStyle from "./styles/global/GlobalStyle";
+import { store } from "./store";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <GlobalStyle />
-      <App />
+      <Provider store={store}>
+        <GlobalStyle />
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );

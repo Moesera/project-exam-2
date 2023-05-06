@@ -1,3 +1,5 @@
+import { useGoBack } from "../../hooks/tools/useGoBack";
+
 import SliderComponent from "../Slider";
 import LocationComponent from "../Location";
 import ProfileCard from "./../Card/Profile";
@@ -5,10 +7,12 @@ import ProfileCard from "./../Card/Profile";
 import StarIcon from "../../../assets/interface/icons8-star-32.png";
 
 function Venue({ venueData }) {
+  const goBack = useGoBack();
 
   return (
     <>
       <section className="my-60 w-3.5/7 mx-auto xl:w-desktop text-xl md-sm:text-2xl">
+      <div className="hover:underline hover:cursor-pointer" onClick={goBack}>Back</div>
         <SliderComponent images={venueData.media} name={venueData.name} />
         <div className="flex items-center justify-between mt-2">
           <h2 className="mb-2 font-semibold sm:truncate">{venueData.name}</h2>

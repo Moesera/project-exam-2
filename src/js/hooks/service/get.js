@@ -43,7 +43,7 @@ export function useGet(url) {
     return {
       headers: {
         Authorization: `Bearer ${token}`,
-      }
+      },
     };
   }, [token]);
 
@@ -56,8 +56,15 @@ export function useGet(url) {
 
         if (checkAuthAndFetch(url)) {
           dataResults = await fetch(url, options);
+          if(dataResults.errors && dataResults.errors.length > 0) {
+            const errorMessage = data.errors[0].message;
+            throw new Error(errorMessage);
+          }
         } else {
           dataResults = await fetch(url);
+          if (!dataResults.ok) {
+            throw new Error(dataResults.statusCode);
+          }
         }
 
         const json = await dataResults.json();

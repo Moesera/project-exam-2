@@ -1,27 +1,30 @@
 import React, { useState, useEffect, useCallback } from "react";
 import useLogin from "./../../hooks/service/login";
-
-import { closeModal } from "../../helpers/modal";
+import { useDispatch } from "react-redux";
+import { closeModal } from "../../hooks/modal";
 
 import RegisterImage from "../../../assets/interface/icons8-add-user-male-100.png";
 import { login } from "../../helpers/constant";
 
 const url = login;
 
-function LoginForm({ setShow, setOpen }) {
+function LoginForm({ setShow }) {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, isSuccess, isLoading, isError } = useLogin(url);
 
   const resetForm = useCallback(() => {
     setTimeout(() => {
-      closeModal({ setOpen, setShow });
+      dispatch(closeModal());
     }, 3500);
-  }, [setOpen, setShow]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (isSuccess) {
       resetForm();
+
     }
   }, [isSuccess, resetForm]);
 
@@ -45,7 +48,7 @@ function LoginForm({ setShow, setOpen }) {
   return (
     <div className="flex flex-col justify-center min-h-full">
       <div className="mx-auto w-4/7">
-      <p onClick={() => closeModal({ setOpen, setShow })} className="mb-4 cursor-pointer">Back</p>
+      <p onClick={() => dispatch(closeModal())} className="mb-4 cursor-pointer">Back</p>
       </div>
       <h2 className="w-11/12 mx-auto mb-12 text-4xl font-medium text-center">Log in to your account</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-5 mx-auto bg-white w-4/7">
