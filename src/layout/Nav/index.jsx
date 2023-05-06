@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { closeModal } from "../../js/helpers/modal";
+import { useSelector, useDispatch } from 'react-redux';
+import { closeModal } from '../../js/hooks/modal';
 
 // images
 import SearchIcon from "../../assets/interface/icons8-search-30.png";
@@ -18,17 +19,16 @@ import LoginForm from "../../js/components/Login";
 import ProfileButton from "../../js/components/ProfileButton";
 
 function Nav() {
+  const isModalOpen = useSelector(state => state.modal?.isOpen);
+  const isLoggedIn = useSelector((state) => state.userAuth?.isLoggedIn);
+  const dispatch = useDispatch();
+
   const [components, setComponents] = useState([LoginForm, RegisterForm]);
-  const [open, setOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
-  // export this or set / get this in Nav to pass it down to the profile component
-  
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
-  console.log(isLoggedIn);
 
   return (
     <>
-      <PopupModal show={showLogin} setShow={setShowLogin} components={components} setComponents={setComponents} setOpen={setOpen} open={open} />
+    {isModalOpen && <PopupModal show={showLogin} setShow={setShowLogin} components={components} setComponents={setComponents} open={isModalOpen} />}
       {/* Search */}
       <section className="flex w-3.5/7 items-center xl:w-desktop">
         <input className="pl-20 h-16.5 border rounded-full border-stone-grey w-full shadow-md" type="text" placeholder="Search venues" />
@@ -44,18 +44,18 @@ function Nav() {
         <nav className="fixed inset-x-0 bottom-0 flex self-center justify-center p-4 bg-white border md:static md:w-2/4 md:p-0 md:border-none border-light-gray font-inder">
           <ul className="flex justify-between w-11/12 m-auto md:gap-4 md:justify-end x-sm:w-3/7 sm:w-3/5 md:w-full lg:gap-8">
             <li className="min-w-[5rem] p-2 rounded-lg hover:cursor-pointer hover:shadow-inner">
-              <Link onClick={() => closeModal({ setOpen, setShowLogin })} to="/" className="flex flex-col items-center text-base">
+              <Link onClick={() => dispatch(closeModal())} to="/" className="flex flex-col items-center text-base">
                 <img className="w-12" src={ExploreIcon} alt="explore img" />
                 Explore
               </Link>
             </li>
             <li className="min-w-[5rem] p-2 rounded-lg hover:cursor-pointer hover:shadow-inner">
-              <Link onClick={() => closeModal({ setOpen, setShowLogin })} className="flex flex-col items-center text-base">
+              <Link onClick={() => dispatch(closeModal())} className="flex flex-col items-center text-base">
                 <img className="w-12" src={BookingIcon} alt="bookings img" />
                 Bookings
               </Link>
             </li>
-            <ProfileButton setOpen={setOpen} setShow={setShowLogin} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            <ProfileButton setShow={setShowLogin} isLoggedIn={isLoggedIn} />
           </ul>
         </nav>
       </section>
