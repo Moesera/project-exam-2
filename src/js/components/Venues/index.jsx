@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
-import { useGet } from "../../hooks/service/get";
-import { venues } from "../../helpers/constant";
 
 import StarIcon from "../../../assets/interface/icons8-star-32.png";
 
 import ShowcaseImage from "./ShowcaseImage";
 import LocationComponent from "../Location";
 
-function Venues() {
-  const { data, isLoading, isError } = useGet(venues);
+function Venues({data, isLoading, isError}) {
+
 
   if (isLoading) {
     return <div>Loading</div>;

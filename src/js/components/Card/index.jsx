@@ -1,4 +1,5 @@
 function CardComponent({ title, content, media, alt }) {
+
   return (
     <div className="flex items-center justify-between min-h-[10rem] gap-2 px-4 py-2 rounded-xl shadow-3xl group/item hover:cursor-pointer">
       <div className="text-lg md-sm:text-2xl basis-[75%] py-4">
