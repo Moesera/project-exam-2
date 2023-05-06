@@ -3,7 +3,8 @@ import useRegister from "./../../hooks/service/register";
 import NewAvatar from "./NewAvatar";
 
 import { register } from "../../helpers/constant";
-import { closeModal } from "../../helpers/modal";
+import { closeModal } from "../../hooks/modal";
+import { useDispatch } from "react-redux";
 
 import AvatarPlaceholder from "../../../assets/images/placeholder/placeholder-profile.jpg";
 import AddIcon from "../../../assets/interface/icons8-add-50.png";
@@ -17,7 +18,9 @@ function increment({ setCount, count }) {
 
 const url = register;
 
-function RegisterForm({ setShow, setOpen }) {
+function RegisterForm({ setShow }) {
+  const dispatch = useDispatch();
+
   const [count, setCount] = useState(0);
   const avatarContainerRef = useRef(null);
   const [isHidden, setIsHidden] = useState(true);
@@ -49,7 +52,6 @@ function RegisterForm({ setShow, setOpen }) {
       resetForm();
     }
   }, [isSuccess, resetForm]);
-
 
   function addImage() {
     // This is the new avatar image from the url input
@@ -95,7 +97,7 @@ function RegisterForm({ setShow, setOpen }) {
   return (
     <div className="flex flex-col justify-center min-h-full">
       <div className="mx-auto w-4/7">
-        <p onClick={() => closeModal({ setOpen, setShow })} className="mb-4 cursor-pointer">
+        <p onClick={() => setShow(true)} className="mb-4 cursor-pointer">
           Back
         </p>
       </div>
