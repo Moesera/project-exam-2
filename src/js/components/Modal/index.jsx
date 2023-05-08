@@ -1,6 +1,6 @@
 import Modal from "react-responsive-modal";
-import { useDispatch } from 'react-redux';
-import { closeModal } from '../../hooks/modal';
+import { useDispatch } from "react-redux";
+import { closeModal } from "../../hooks/modal";
 
 /**
  * popup modal.
@@ -34,20 +34,25 @@ import { closeModal } from '../../hooks/modal';
  *
  * ```
  */
-export default function PopupModal({ show, setShow, components, setComponents, open }) {
+export default function PopupModal({ show, setShow, components, open }) {
   const dispatch = useDispatch();
   // I need to set these values to header to pass it down to PopupModal (DONE)
-  const LoginForm = components[0];
-  const RegisterForm = components[1];
-  
+  const Component1 = components[0];
+  const Component2 = components[1];
+
   return (
     <div>
-      {/* This should stay in the popupModal component */}
-      <Modal classNames={{
-      overlay: "fixed inset-0 bottom-[7.6rem] bg-white bg-opacity-50", 
-      modal: "fixed bg-white inset-0 bottom-[7.6rem] w-full z-50"}}
-      open={open} onClose={() => dispatch(closeModal())} showCloseIcon={false} center>
-        {show ? <LoginForm setShow={setShow} /> : <RegisterForm setShow={setShow} />}
+      <Modal
+        classNames={{
+          overlay: "fixed inset-0 bottom-[7.6rem] bg-white bg-opacity-50",
+          modal: "fixed bg-white inset-0 bottom-[7.6rem] w-full z-50",
+        }}
+        open={open}
+        onClose={() => dispatch(closeModal())}
+        showCloseIcon={false}
+        center
+      >
+        {show ? <Component1 setShow={setShow} /> : <Component2 setShow={setShow} />}
       </Modal>
     </div>
   );
