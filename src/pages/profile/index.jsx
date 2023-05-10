@@ -33,7 +33,7 @@ function Profile() {
       return <UserProfile userData={userData} venuesData={venuesData} isLoadingVenues={isLoadingVenues} isErrorVenues={isErrorVenues} setShowUserProfile={setShowUserProfile} user={user}/>;
     }
 
-    return <UserProfileManager userData={userData} setShowUserProfile={setShowUserProfile}/>;
+    return <UserProfileManager userData={userData} venuesData={venuesData} setShowUserProfile={setShowUserProfile}/>;
   }
 }
 

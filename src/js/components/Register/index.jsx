@@ -3,8 +3,6 @@ import useRegister from "./../../hooks/service/register";
 import NewAvatar from "./NewAvatar";
 
 import { register } from "../../helpers/constant";
-import { closeModal } from "../../hooks/modal";
-import { useDispatch } from "react-redux";
 
 import AvatarPlaceholder from "../../../assets/images/placeholder/placeholder-profile.jpg";
 import AddIcon from "../../../assets/interface/icons8-add-50.png";
@@ -19,7 +17,6 @@ function increment({ setCount, count }) {
 const url = register;
 
 function RegisterForm({ setShow }) {
-  const dispatch = useDispatch();
 
   const [count, setCount] = useState(0);
   const avatarContainerRef = useRef(null);

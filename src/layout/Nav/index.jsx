@@ -23,15 +23,15 @@ function Nav() {
   const isLoggedIn = useSelector((state) => state.userAuth?.isLoggedIn);
   const dispatch = useDispatch();
 
-  const [components, setComponents] = useState([LoginForm, RegisterForm]);
+  const components = [LoginForm, RegisterForm];
   const [showLogin, setShowLogin] = useState(true);
 
   return (
     <>
-    {isModalOpen && <PopupModal show={showLogin} setShow={setShowLogin} components={components} setComponents={setComponents} open={isModalOpen} />}
+    {isModalOpen && <PopupModal show={showLogin} setShow={setShowLogin} components={components} open={isModalOpen} />}
       {/* Search */}
       <section className="flex w-3.5/7 items-center xl:w-desktop">
-        <input className="pl-20 h-16.5 border rounded-full border-stone-grey w-full shadow-md" type="text" placeholder="Search venues" />
+        <input className="pl-20 h-16.5 rounded-full bg-white w-full shadow-3xl" type="text" placeholder="Search venues" />
         <label className="absolute flex items-center justify-between pl-6 pr-6">
           <div>
             <img className="w-10" src={SearchIcon} alt="search" />
