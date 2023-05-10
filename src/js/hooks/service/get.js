@@ -79,7 +79,7 @@ export function useGet(url) {
     }
 
     getData();
-  }, [url, options]);
+  }, [url, options, data.errors]);
 
   if (data) {
     return { data, isLoading, isError };
