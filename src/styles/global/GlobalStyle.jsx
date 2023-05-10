@@ -77,6 +77,11 @@ const GlobalStyle = createGlobalStyle`
     padding: 1rem;
     border-radius: 0.5rem;
   }
+
+  .error-message {
+    color: red;
+    font-weight: 500;
+  }
 `;
 
 export default GlobalStyle;
