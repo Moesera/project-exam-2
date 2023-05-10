@@ -5,6 +5,7 @@ import { useGoBack } from "../../../hooks/tools/useGoBack";
 
 import CardComponent from "../../Card/index";
 import CreateVenue from "../../CreateVenue";
+import EditVenue from "../../EditVenue";
 // media
 import ArrowRight from "../../../../assets/interface/icons8-chevron-right.png";
 import HouseIcon from "../../../../assets/interface/icons8-home-100.png";
@@ -13,7 +14,7 @@ import EditBookingIcon from "../../../../assets/interface/icons8-schedule-100.pn
 import SupportIcon from "../../../../assets/interface/icons8-technical-support-100.png";
 // import { handleAvatarImgError } from "../../../helpers/placeholder";
 
-function UserProfileManager({ userData, setShowUserProfile }) {
+function UserProfileManager({ userData, venuesData, setShowUserProfile }) {
   const navigate = useNavigate();
   const goBack = useGoBack();
 
@@ -34,12 +35,10 @@ function UserProfileManager({ userData, setShowUserProfile }) {
 // so does the active content, then have a back button to the initial one.
 switch (activeComponent) {
   case "create":
-    return <CreateVenue />
+    return <CreateVenue setActiveComponent={setActiveComponent} />
   case "edit":
     console.log("edit")
-    // display venues and let them click onto their venue to edit them in the venue
-    //  code
-    break;
+    return <EditVenue setActiveComponent={setActiveComponent} data={venuesData} />
   case "bookings":
     console.log("bookings")
     //  Open modal and display users bookings and a link to the venue they booked
