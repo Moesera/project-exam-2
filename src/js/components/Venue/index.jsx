@@ -1,24 +1,30 @@
 import { useState } from "react";
 import { useGoBack } from "../../hooks/tools/useGoBack";
+import { openBooking } from "../../hooks/bookingModal";
+import { getItem } from "../../localStorage/getItem";
+import { useParams } from "react-router-dom";
+import { useApi } from "../../hooks/service/api";
+import { venues } from "../../helpers/constant";
+import { useDispatch, useSelector } from "react-redux";
 
 import SliderComponent from "../Slider";
 import LocationComponent from "../Location";
 import ProfileCard from "./../Card/Profile";
 import EditForm from "../EditForm";
+import BookingModal from "../Booking/Modal";
 
 import StarIcon from "../../../assets/interface/icons8-star-32.png";
-import { getItem } from "../../localStorage/getItem";
-import { useParams } from "react-router-dom";
-import { useApi } from "../../hooks/service/api";
-import { venues } from "../../helpers/constant";
+
 
 function Venue({ venueData }) {
+  const isModalOpen = useSelector(state => state.booking?.isOpen);
+  const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
   const { id } = useParams();
   const { apiData } = useApi(venues + id);
-
-  const goBack = useGoBack();
   const user = getItem("user");
+  
+  const goBack = useGoBack();
 
   function deleteVenue() {
     const method = "DELETE"
@@ -38,6 +44,7 @@ function Venue({ venueData }) {
 
   return (
     <>
+    {isModalOpen && <BookingModal open={isModalOpen}/>}
       <section className="my-60 w-3.5/7 mx-auto xl:w-desktop text-xl md-sm:text-2xl">
         <div className="my-4 hover:underline hover:cursor-pointer" onClick={goBack}>
           Back
@@ -64,9 +71,9 @@ function Venue({ venueData }) {
                 <h3 className="font-semibold">{venueData.price} kr</h3>
                 <p>night</p>
               </div>
-              <form>
-                <button className="px-4 py-2 font-medium text-white rounded-xl bg-ocean">Book venue</button>
-              </form>
+              <div>
+                <button onClick={() => dispatch(openBooking())} className="px-4 py-2 font-medium text-white shadow-3xl rounded-xl bg-ocean hover:bg-opacity-90">Book venue</button>
+              </div>
             </div>
           </section>
 
