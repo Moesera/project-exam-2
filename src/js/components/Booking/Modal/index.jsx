@@ -38,7 +38,7 @@ import Booking from "..";
  *
  * ```
  */
-export default function BookingModal({ open }) {
+export default function BookingModal({ open, venueId }) {
   const dispatch = useDispatch();
 
   return (
@@ -53,7 +53,7 @@ export default function BookingModal({ open }) {
         showCloseIcon={false}
         center
       >
-        <Booking />
+        <Booking venueId={venueId}/>
         {/* {show ?  : } */}
       </Modal>
     </div>
