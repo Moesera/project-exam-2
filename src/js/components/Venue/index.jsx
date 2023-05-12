@@ -44,7 +44,7 @@ function Venue({ venueData }) {
 
   return (
     <>
-    {isModalOpen && <BookingModal open={isModalOpen}/>}
+    {isModalOpen && <BookingModal open={isModalOpen} venueId={venueData.id}/>}
       <section className="my-60 w-3.5/7 mx-auto xl:w-desktop text-xl md-sm:text-2xl">
         <div className="my-4 hover:underline hover:cursor-pointer" onClick={goBack}>
           Back
