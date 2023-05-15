@@ -15,19 +15,18 @@ import BookingModal from "../Booking/Modal";
 
 import StarIcon from "../../../assets/interface/icons8-star-32.png";
 
-
 function Venue({ venueData }) {
-  const isModalOpen = useSelector(state => state.booking?.isOpen);
+  const isModalOpen = useSelector((state) => state.booking?.isOpen);
   const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
   const { id } = useParams();
   const { apiData } = useApi(venues + id);
   const user = getItem("user");
-  
+
   const goBack = useGoBack();
 
   function deleteVenue() {
-    const method = "DELETE"
+    const method = "DELETE";
     apiData(null, method);
     goBack();
   }
@@ -44,7 +43,7 @@ function Venue({ venueData }) {
 
   return (
     <>
-    {isModalOpen && <BookingModal open={isModalOpen} venueId={venueData.id}/>}
+      {isModalOpen && <BookingModal open={isModalOpen} venueId={venueData.id} venueGuests={venueData.maxGuests} bookingsArray={venueData.bookings} />}
       <section className="my-60 w-3.5/7 mx-auto xl:w-desktop text-xl md-sm:text-2xl">
         <div className="my-4 hover:underline hover:cursor-pointer" onClick={goBack}>
           Back
@@ -72,7 +71,9 @@ function Venue({ venueData }) {
                 <p>night</p>
               </div>
               <div>
-                <button onClick={() => dispatch(openBooking())} className="px-4 py-2 font-medium text-white shadow-3xl rounded-xl bg-ocean hover:bg-opacity-90">Book venue</button>
+                <button onClick={() => dispatch(openBooking())} className="px-4 py-2 font-medium text-white shadow-3xl rounded-xl bg-ocean hover:bg-opacity-90">
+                  Book venue
+                </button>
               </div>
             </div>
           </section>
@@ -82,21 +83,30 @@ function Venue({ venueData }) {
           </section>
           {venueData.owner && user.name === venueData.owner.name && (
             <section>
-            <div className="flex gap-4 mt-2">
-              <button className="flex-1 p-2 border rounded-lg bg-error hover:cursor-pointer" type="button" onClick={deleteVenue}>
-                Delete
-              </button>
-              <button onClick={handleShowForm} className="flex-1 p-2 border rounded-lg bg-success hover:cursor-pointer" type="button">
-                Edit
-              </button>
-            </div>
-            <h2 className="mt-5 mb-5 text-3xl font-medium text-center">Bookings</h2>
-            <div>
-              {venueData.bookings.length < 0 ? 
-              <div></div> 
-              : 
-              <p className="text-center">You currently have no bookings for this venue</p>}
-            </div>
+              <div className="flex gap-4 mt-2">
+                <button className="flex-1 p-2 border rounded-lg bg-error hover:cursor-pointer" type="button" onClick={deleteVenue}>
+                  Delete
+                </button>
+                <button onClick={handleShowForm} className="flex-1 p-2 border rounded-lg bg-success hover:cursor-pointer" type="button">
+                  Edit
+                </button>
+              </div>
+              <h2 className="mt-5 mb-5 text-3xl font-medium text-center">Bookings</h2>
+              <div>
+                {venueData.bookings.length > 0 ? (
+                  <div>
+                    {venueData.bookings.map((booking, index) => (
+                      <div key={index}>
+                        <p>{booking.dateFrom}</p>
+                        <p>{booking.dateTo}</p>
+                        <p>{booking.guests}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-center">You currently have no bookings for this venue</p>
+                )}
+              </div>
             </section>
           )}
         </div>
