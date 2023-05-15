@@ -4,41 +4,7 @@ import { closeBooking } from "../../../hooks/bookingModal";
 
 import Booking from "..";
 
-// blur-lg
-
-/**
- * popup modal.
- * @returns a popup modal with content provided
- * @example
- * ```
- * // imports
- * import { openModal, closeModal } from "helpers";
- * import ComponentA from './ComponentA';
- * import ComponentB from './ComponentB';
- *
- * // buttons to create
- * <button onClick={openModal(setOpen)}></button>
- * // you can place close inside the modal.
- * <button onClick={closeModal(setOpen)}></button>
- *
- * function App() {
- * // you can pass down two components to switch between in the modal,
- * // You can also pass it down to replace the modal items or item to f.eks success message.
- * const [components, setComponents] = useState([ComponentA, ComponentB]);
- * const [open, setOpen] = useState(false);
- * const [showLogin, setShowLogin] = useState(true);
- *
- * return (
- *   <>
- *     <button onClick={openModal(setOpen)}></button>
- *     <PopupModal setShow={showLogin} components={components} setComponents={setComponents} setOpen={setOpen} open={open}/>
- *   </>
- *  )
- * }
- *
- * ```
- */
-export default function BookingModal({ open, venueId }) {
+export default function BookingModal({ open, venueId, venueGuests, bookingsArray }) {
   const dispatch = useDispatch();
 
   return (
@@ -53,7 +19,7 @@ export default function BookingModal({ open, venueId }) {
         showCloseIcon={false}
         center
       >
-        <Booking venueId={venueId}/>
+        <Booking venueId={venueId} venueGuests={venueGuests} bookingsArray={bookingsArray}/>
         {/* {show ?  : } */}
       </Modal>
     </div>
