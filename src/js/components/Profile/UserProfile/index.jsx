@@ -40,7 +40,6 @@ switch (activeComponent) {
   case "edit":
     return <EditVenue setActiveComponent={setActiveComponent} data={venuesData} />
   case "bookings":
-    console.log("bookings");
     return <UserBookings setActiveComponent={setActiveComponent} data={userData.bookings}/>
   case "support":
     console.log("support")
