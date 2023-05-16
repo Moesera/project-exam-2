@@ -6,6 +6,7 @@ import { useGoBack } from "../../../hooks/tools/useGoBack";
 import CardComponent from "../../Card/index";
 import CreateVenue from "../../CreateVenue";
 import EditVenue from "../../EditVenue";
+import UserBookings from "../../Bookings";
 // media
 import ArrowRight from "../../../../assets/interface/icons8-chevron-right.png";
 import HouseIcon from "../../../../assets/interface/icons8-home-100.png";
@@ -37,13 +38,10 @@ switch (activeComponent) {
   case "create":
     return <CreateVenue setActiveComponent={setActiveComponent} />
   case "edit":
-    console.log("edit")
     return <EditVenue setActiveComponent={setActiveComponent} data={venuesData} />
   case "bookings":
-    console.log("bookings")
-    //  Open modal and display users bookings and a link to the venue they booked
-    // code
-    break;
+    console.log("bookings");
+    return <UserBookings setActiveComponent={setActiveComponent} data={userData.bookings}/>
   case "support":
     console.log("support")
     // Open a form to contact support. maybe make an editable form where you can
