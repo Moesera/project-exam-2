@@ -18,7 +18,7 @@ console.log(data)
       <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
         Back
       </div>
-      <h1 className="py-10 mt-12 text-5xl font-medium">Bookings</h1>
+      <h1 className="py-10 mt-12 text-4xl font-medium">Bookings</h1>
       {data ? (
         <section className="flex flex-col gap-4">
           {data.map((bookings) => (
