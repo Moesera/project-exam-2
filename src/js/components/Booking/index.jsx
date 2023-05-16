@@ -30,8 +30,6 @@ function Booking({ venueId, venueGuests, bookingsArray }) {
       const dateFrom = new Date(booking.dateFrom);
       const dateTo = new Date(booking.dateTo);
       return getDatesBetween(dateFrom, dateTo);
-      // disableDates = [...disableDates, ...dates];
-      // console 39 disable dates
     });
     setDisableDates(dates.flat());
   }, [])
