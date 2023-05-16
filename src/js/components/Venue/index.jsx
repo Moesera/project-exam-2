@@ -14,6 +14,7 @@ import EditForm from "../EditForm";
 import BookingModal from "../Booking/Modal";
 
 import StarIcon from "../../../assets/interface/icons8-star-32.png";
+import BookingDate from "../BookingDate";
 
 function Venue({ venueData }) {
   const isModalOpen = useSelector((state) => state.booking?.isOpen);
@@ -96,10 +97,12 @@ function Venue({ venueData }) {
                 {venueData.bookings.length > 0 ? (
                   <div>
                     {venueData.bookings.map((booking, index) => (
-                      <div key={index}>
-                        <p>{booking.dateFrom}</p>
-                        <p>{booking.dateTo}</p>
-                        <p>{booking.guests}</p>
+                      <div className="flex flex-col items-center justify-between min-h-[8rem] gap-2 px-4 py-2 rounded-xl shadow-3xl" key={index}>
+                        <p>Guests - {booking.guests}</p>
+                        <div className="flex gap-4">
+                          <p>Period:</p>
+                          <BookingDate dateFrom={booking.dateFrom} dateTo={booking.dateTo} />
+                        </div>
                       </div>
                     ))}
                   </div>
