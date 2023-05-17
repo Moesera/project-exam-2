@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import { useApi } from "../../hooks/service/api";
 import { closeBooking } from "../../hooks/bookingModal";
 import { bookings } from "../../helpers/constant";
-import { useParams } from "react-router-dom";
 
 const schema = yup
   .object({
@@ -19,20 +18,19 @@ const schema = yup
 
 function Booking({ venueId, venueGuests, bookingsArray }) {
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const { apiData, isSuccess, isError } = useApi(bookings + id);
+  const { apiData, isSuccess, isError } = useApi(bookings);
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
   const [disableDates, setDisableDates] = useState([]);
 
   const handleBookingArray = useCallback((bookingsArray) => {
-    const dates =  bookingsArray.map((booking) => {
+    const dates = bookingsArray.map((booking) => {
       const dateFrom = new Date(booking.dateFrom);
       const dateTo = new Date(booking.dateTo);
       return getDatesBetween(dateFrom, dateTo);
     });
     setDisableDates(dates.flat());
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (bookingsArray) {
@@ -61,11 +59,13 @@ function Booking({ venueId, venueGuests, bookingsArray }) {
   function onSubmit(data) {
     const method = "POST";
     const updatedData = { ...data, dateFrom: startDate, dateTo: endDate, venueId: venueId };
-    console.log(updatedData, method);
     apiData(updatedData, method);
+  }
+
+  if (isSuccess) {
     setTimeout(() => {
-      dispatch(closeBooking())
-    }, 2500)
+      dispatch(closeBooking());
+    }, 2500);
   }
 
   function FromDate({ className, children }) {
@@ -111,6 +111,7 @@ function Booking({ venueId, venueGuests, bookingsArray }) {
         <label className="flex flex-col">
           guests
           <input {...register("guests")} className="p-2 border rounded-lg" type="number" defaultValue={1} min={1} max={venueGuests} />
+          <p className="error-guests">{errors.guests?.message}</p>
         </label>
         <div className="">
           <button className="flex-1 px-4 py-2 border rounded-lg bg-ocean hover:cursor-pointer">Book</button>
