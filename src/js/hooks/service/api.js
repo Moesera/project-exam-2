@@ -37,8 +37,6 @@ export function useApi(url) {
           //   }
           // }
 
-
-          console.log(options);
           dataResults = await fetch(url, options);
 
         const json = await dataResults.json();
@@ -48,7 +46,6 @@ export function useApi(url) {
           setIsSuccess(true);
         }
       } catch (error) {
-        console.log(error);
         setIsError(error);
       } finally {
         setIsLoading(false);
