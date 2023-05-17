@@ -93,9 +93,8 @@ function Venue({ venueData }) {
                 </button>
               </div>
               <h2 className="mt-5 mb-5 text-3xl font-medium text-center">Bookings</h2>
-              <div>
                 {venueData.bookings.length > 0 ? (
-                  <div>
+                  <div className="flex flex-col gap-4">
                     {venueData.bookings.map((booking, index) => (
                       <div className="flex flex-col items-center justify-between min-h-[8rem] gap-2 px-4 py-2 rounded-xl shadow-3xl" key={index}>
                         <p>Guests - {booking.guests}</p>
@@ -109,7 +108,6 @@ function Venue({ venueData }) {
                 ) : (
                   <p className="text-center">You currently have no bookings for this venue</p>
                 )}
-              </div>
             </section>
           )}
         </div>

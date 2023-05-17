@@ -7,6 +7,7 @@ import CardComponent from "../../Card/index";
 import CreateVenue from "../../CreateVenue";
 import EditVenue from "../../EditVenue";
 import UserBookings from "../../Bookings";
+
 // media
 import ArrowRight from "../../../../assets/interface/icons8-chevron-right.png";
 import HouseIcon from "../../../../assets/interface/icons8-home-100.png";
