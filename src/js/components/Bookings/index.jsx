@@ -15,6 +15,8 @@ function UserBookings({ setActiveComponent, data }) {
       position: "top-center",
       autoClose: 2500,
       hideProgressBar: true,
+      theme: "colored",
+      closeOnClick: true,
     });
 
   function DeleteButton({ id, setBookingsData }) {
