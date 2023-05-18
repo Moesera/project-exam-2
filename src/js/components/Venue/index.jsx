@@ -1,27 +1,33 @@
 import { useState } from "react";
 import { useGoBack } from "../../hooks/tools/useGoBack";
+import { openBooking } from "../../hooks/bookingModal";
+import { getItem } from "../../localStorage/getItem";
+import { useParams } from "react-router-dom";
+import { useApi } from "../../hooks/service/api";
+import { venues } from "../../helpers/constant";
+import { useDispatch, useSelector } from "react-redux";
 
 import SliderComponent from "../Slider";
 import LocationComponent from "../Location";
 import ProfileCard from "./../Card/Profile";
 import EditForm from "../EditForm";
+import BookingModal from "../Booking/Modal";
 
 import StarIcon from "../../../assets/interface/icons8-star-32.png";
-import { getItem } from "../../localStorage/getItem";
-import { useParams } from "react-router-dom";
-import { useApi } from "../../hooks/service/api";
-import { venues } from "../../helpers/constant";
+import BookingDate from "../BookingDate";
 
 function Venue({ venueData }) {
+  const isModalOpen = useSelector((state) => state.booking?.isOpen);
+  const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
   const { id } = useParams();
   const { apiData } = useApi(venues + id);
-
-  const goBack = useGoBack();
   const user = getItem("user");
 
+  const goBack = useGoBack();
+
   function deleteVenue() {
-    const method = "DELETE"
+    const method = "DELETE";
     apiData(null, method);
     goBack();
   }
@@ -38,6 +44,7 @@ function Venue({ venueData }) {
 
   return (
     <>
+      {isModalOpen && <BookingModal open={isModalOpen} venueId={venueData.id} venueGuests={venueData.maxGuests} bookingsArray={venueData.bookings} />}
       <section className="my-60 w-3.5/7 mx-auto xl:w-desktop text-xl md-sm:text-2xl">
         <div className="my-4 hover:underline hover:cursor-pointer" onClick={goBack}>
           Back
@@ -64,9 +71,11 @@ function Venue({ venueData }) {
                 <h3 className="font-semibold">{venueData.price} kr</h3>
                 <p>night</p>
               </div>
-              <form>
-                <button className="px-4 py-2 font-medium text-white rounded-xl bg-ocean">Book venue</button>
-              </form>
+              <div>
+                <button onClick={() => dispatch(openBooking())} className="px-4 py-2 font-medium text-white shadow-3xl rounded-xl bg-ocean hover:bg-opacity-90">
+                  Book venue
+                </button>
+              </div>
             </div>
           </section>
 
@@ -75,21 +84,30 @@ function Venue({ venueData }) {
           </section>
           {venueData.owner && user.name === venueData.owner.name && (
             <section>
-            <div className="flex gap-4 mt-2">
-              <button className="flex-1 p-2 border rounded-lg bg-error hover:cursor-pointer" type="button" onClick={deleteVenue}>
-                Delete
-              </button>
-              <button onClick={handleShowForm} className="flex-1 p-2 border rounded-lg bg-success hover:cursor-pointer" type="button">
-                Edit
-              </button>
-            </div>
-            <h2 className="mt-5 mb-5 text-3xl font-medium text-center">Bookings</h2>
-            <div>
-              {venueData.bookings.length < 0 ? 
-              <div></div> 
-              : 
-              <p className="text-center">You currently have no bookings for this venue</p>}
-            </div>
+              <div className="flex gap-4 mt-2">
+                <button className="flex-1 p-2 border rounded-lg bg-error hover:cursor-pointer" type="button" onClick={deleteVenue}>
+                  Delete
+                </button>
+                <button onClick={handleShowForm} className="flex-1 p-2 border rounded-lg bg-success hover:cursor-pointer" type="button">
+                  Edit
+                </button>
+              </div>
+              <h2 className="mt-5 mb-5 text-3xl font-medium text-center">Bookings</h2>
+                {venueData.bookings.length > 0 ? (
+                  <div className="flex flex-col gap-4">
+                    {venueData.bookings.map((booking, index) => (
+                      <div className="flex flex-col items-center justify-between min-h-[8rem] gap-2 px-4 py-2 rounded-xl shadow-3xl" key={index}>
+                        <p>Guests - {booking.guests}</p>
+                        <div className="flex gap-4">
+                          <p>Period:</p>
+                          <BookingDate dateFrom={booking.dateFrom} dateTo={booking.dateTo} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-center">You currently have no bookings for this venue</p>
+                )}
             </section>
           )}
         </div>

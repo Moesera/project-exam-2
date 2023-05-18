@@ -50,7 +50,6 @@ function EditForm({ setShowForm, venueData }) {
     return false;
   }
 
-  console.log("mediaArray:", mediaArray);
   const {
     register,
     handleSubmit,

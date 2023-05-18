@@ -4,3 +4,16 @@
 --font-inter: 'Inter', sans-serif;
 --font-inder: 'Inder', sans-serif;
 }
+
+.react-datepicker__month-container {
+  width: 100%;
+}
+
+.react-datepicker__day {
+width: 1.9rem;
+line-height: 1.9rem;
+}
+
+/* .react.datepicker_week {
+
+} */

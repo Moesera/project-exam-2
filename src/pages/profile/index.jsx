@@ -11,7 +11,7 @@ function Profile() {
   let { name } = useParams();
   const user = getItem("user");
 
-  const { data: userData, isLoading: isLoadingUser, isError: isErrorUser } = useGet(profile + name);
+  const { data: userData, isLoading: isLoadingUser, isError: isErrorUser } = useGet(profile + name + "?_bookings=true");
   const { data: venuesData, isLoading: isLoadingVenues, isError: isErrorVenues } = useGet(profile + name + "/venues");
 
   const [showUserProfile, setShowUserProfile] = useState(false);
