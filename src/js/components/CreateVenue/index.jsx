@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useApi } from "../../hooks/service/api";
 import { venues } from "../../helpers/constant";
 
@@ -18,7 +20,7 @@ const schema = yup
         .matches(/^(https?|ftp):\/\/(-\.)?([^\s/?.#-]+\.?)+(\/[^\s]*)?$/, "non-valid url, start with https/ftp and with that ends with jpg")
     ),
     price: yup.number().positive().integer("please enter a price").min(1, "price must be at least 1").typeError("please enter a valid price").required("Please enter a price"),
-    maxGuests: yup.number().positive().integer().max(200).typeError("please enter a number").required(),
+    maxGuests: yup.number().positive().integer().max(100).typeError("please enter a number").required(),
     location: yup.object({
       city: yup.string().required("you are required to provide a city"),
       zip: yup.string("has to be number").required("you are required to fill in zip"),
@@ -31,6 +33,16 @@ const schema = yup
 function CreateVenue({setActiveComponent}) {
   const [mediaFields, setMediaFields] = useState([{ url: "" }]);
   const { apiData, isSuccess, isLoading, isError } = useApi(venues);
+
+  const notify = () =>
+  toast.success("Venue was successfully created", {
+    position: "top-center",
+    autoClose: 2500,
+    hideProgressBar: true,
+    theme: "colored",
+    closeOnClick: true,
+  });
+
 
 function goBack() {
   setActiveComponent("default");
@@ -47,8 +59,8 @@ function goBack() {
 
   function onSubmit(data) {
     const method = "POST"
-    console.log(data);
     apiData(data, method);
+    notify();
     reset();
   }
 
@@ -66,6 +78,7 @@ function goBack() {
 
   return (
     <main className="pt-72 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
+      <ToastContainer />
         <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
           Back
         </div>
@@ -168,5 +181,3 @@ function goBack() {
 }
 
 export default CreateVenue;
-
-// {/* disabled={isLoading} */}
