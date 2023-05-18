@@ -28,7 +28,7 @@ const schema = yup
 function EditForm({ setShowForm, venueData }) {
   const { id } = useParams()
   const [mediaArray, setMediaArray] = useState([...venueData.media]);
-  const { apiData, isSuccess, isLoading, isError } = useApi(venues + id);
+  const { apiData, isSuccess, isLoading, isError, } = useApi(venues + id);
 
   const [urlInput, setUrlInput] = useState("");
   const [urlError, setUrlError] = useState("");
@@ -53,7 +53,6 @@ function EditForm({ setShowForm, venueData }) {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -66,7 +65,9 @@ function EditForm({ setShowForm, venueData }) {
     const method = "PUT";
     const updatedData = {...data, media: mediaArray}
     apiData(updatedData, method);
-    reset();
+    setTimeout(() => {
+      goBack();
+    }, 2500);
   }
 
   function goBack() {
@@ -103,7 +104,7 @@ function EditForm({ setShowForm, venueData }) {
       <SliderComponent images={mediaArray} name={venueData.name} />
       <div className="flex flex-col gap-3 mx-auto mt-3">
         {mediaArray.map((media, i) => (
-          <div key={i} className="flex items-center">
+          <div key={i} className="flex items-center justify-between">
             <p className="truncate">{media}</p>
             <button type="button" onClick={() => removeMedia(i)} className="px-2 border rounded-lg bg-error">
               X
