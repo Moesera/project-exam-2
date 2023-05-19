@@ -18,14 +18,14 @@ const dispatch = useDispatch();
   return (
     <div>
       {isLoggedIn ? (
-            <li className="min-w-[5rem] p-2 rounded-lg hover:cursor-pointer hover:shadow-inner">
+            <li className="min-w-[5rem] p-2 hover:cursor-pointer border-b-4 hover:border-gray border-white">
             <Link to={`/profile/${user.name}`} className="flex flex-col items-center text-base ">
               <img className="w-12" src={ProfileIcon} alt="profile img" />
               Profile
             </Link>
           </li>
       ) : (
-        <li className="min-w-[5rem] p-2 rounded-lg hover:cursor-pointer hover:shadow-inner">
+        <li className="min-w-[5rem] p-2 hover:cursor-pointer border-b-4 hover:border-gray border-white">
         <Link onClick={() => dispatch(openModal())} className="flex flex-col items-center text-base ">
           <img className="w-12" src={ProfileIcon} alt="profile img" />
           login
