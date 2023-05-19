@@ -9,12 +9,13 @@ export const store = configureStore({
     // Handles the open and closing of the modal
     modal: modalSlice,
 
+    // modal for bookings
     booking: bookingSlice,
-    
+
     // checks if the user is logged inn or not.
     userAuth: userAuthSlice,
 
-    //  search functionality
-    searchItem: searchSlice,
+    // search functionality
+    search: searchSlice,
   },
 });
