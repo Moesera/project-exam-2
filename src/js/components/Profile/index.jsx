@@ -17,7 +17,7 @@ function UserProfile({ userData, venuesData, isLoadingVenues, isErrorVenues, set
         </div>
       ) : (
         <div className="hover:underline hover:cursor-pointer" onClick={showProfile}>
-          Back to
+          Back
         </div>
       )}
       <h1 className="text-5xl font-medium mt-14">Profile</h1>

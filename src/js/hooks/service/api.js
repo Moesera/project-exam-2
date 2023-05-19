@@ -9,52 +9,52 @@ export function useApi(url) {
 
   const token = getItem("token");
 
-    async function apiData(body, method) {
-      const options = {
-          method: method,
-          body: JSON.stringify(body),
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
+  async function apiData(body, method) {
+    const options = {
+      method: method,
+      body: JSON.stringify(body),
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      setIsLoading(true);
+      setIsError(false);
+      setIsSuccess(false);
+      let dataResults;
+
+      dataResults = await fetch(url, options);
+
+      if (!dataResults.ok) {
+        // Handle bad HTTP response
+        const data = await dataResults.json();
+        if (data.errors && data.errors.length > 0) {
+          // Extract error message from response data
+          const errorMessage = data.errors[0].message;
+          throw new Error(errorMessage);
+        } else {
+          throw new Error(`Request failed with status code ${dataResults.status}`);
         }
-
-      try {
-        setIsLoading(true);
-        setIsError(false);
-        setIsSuccess(false);
-        let dataResults;
-
-          // if (!dataResults.ok) {
-          //   // Handle bad HTTP response
-          //   const data = await dataResults.json();
-          //   if (data.errors && data.errors.length > 0) {
-          //     // Extract error message from response data
-          //     const errorMessage = data.errors[0].message;
-          //     throw new Error(errorMessage);
-          //   } else {
-          //     throw new Error(`Request failed with status code ${dataResults.status}`);
-          //   }
-          // }
-
-          dataResults = await fetch(url, options);
-
-        const json = await dataResults.json();
-
-        setData(json);
-        if(dataResults.ok) {
-          setIsSuccess(true);
-        }
-      } catch (error) {
-        setIsError(error);
-      } finally {
-        setIsLoading(false);
       }
-    }
 
-    
+      console.log(dataResults);
+      const json = await dataResults.json();
+
+      setData(json);
+      if (dataResults.ok) {
+        setIsSuccess(true);
+      }
+    } catch (error) {
+      console.log(error);
+      setIsError(error.errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   if (data) {
-    return {apiData, isSuccess, isLoading, isError };
+    return { apiData, isSuccess, isLoading, isError };
   }
 }

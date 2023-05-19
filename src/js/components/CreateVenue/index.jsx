@@ -2,23 +2,20 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import validator from "validator";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useApi } from "../../hooks/service/api";
 import { venues } from "../../helpers/constant";
 
-// import SliderComponent from "../Slider/index";
+import SliderComponent from "../Slider/index";
 
 const schema = yup
   .object({
     name: yup.string().min(3).required(),
     description: yup.string().min(10).required(),
-    media: yup.array().of(
-      yup
-        .string()
-        .url()
-        .matches(/^(https?|ftp):\/\/(-\.)?([^\s/?.#-]+\.?)+(\/[^\s]*)?$/, "non-valid url, start with https/ftp and with that ends with jpg")
-    ),
     price: yup.number().positive().integer("please enter a price").min(1, "price must be at least 1").typeError("please enter a valid price").required("Please enter a price"),
-    maxGuests: yup.number().positive().integer().max(200).typeError("please enter a number").required(),
+    maxGuests: yup.number().positive().integer().max(100).typeError("please enter a number").required(),
     location: yup.object({
       city: yup.string().required("you are required to provide a city"),
       zip: yup.string("has to be number").required("you are required to fill in zip"),
@@ -29,8 +26,38 @@ const schema = yup
   .required();
 
 function CreateVenue({setActiveComponent}) {
-  const [mediaFields, setMediaFields] = useState([{ url: "" }]);
+  const [mediaArray, setMediaArray] = useState([]);
   const { apiData, isSuccess, isLoading, isError } = useApi(venues);
+
+  const [urlInput, setUrlInput] = useState("");
+  const [urlError, setUrlError] = useState("");
+
+  const handleUrlChange = (event) => {
+    setUrlInput(event.target.value);
+    if (!validateUrl(event.target.value)) {
+      setUrlError("Please enter a valid URL to apply image");
+    } else {
+      setUrlError("");
+    }
+  };
+
+  function validateUrl(url) {
+    if (validator.isURL(url)) {
+      return true;
+    }
+  
+    return false;
+  }
+
+  const notify = () =>
+  toast.success("Venue was successfully created", {
+    position: "bottom-center",
+    autoClose: 2500,
+    hideProgressBar: true,
+    theme: "colored",
+    closeOnClick: true,
+  });
+
 
 function goBack() {
   setActiveComponent("default");
@@ -46,19 +73,38 @@ function goBack() {
   });
 
   function onSubmit(data) {
+    if (urlError) {
+      return;
+    }
     const method = "POST"
-    console.log(data);
+    notify();
     apiData(data, method);
     reset();
   }
 
-  const addMediaField = () => {
-    setMediaFields([...mediaFields, { url: "" }]);
-  };
+  // const addMediaField = () => {
+  //   setMediaFields([...mediaFields, { url: "" }]);
+  // };
 
-  const removeMediaField = () => {
-    setMediaFields(mediaFields.slice(0, -1));
-  };
+  // const removeMediaField = () => {
+  //   setMediaFields(mediaFields.slice(0, -1));
+  // };
+
+    //  adding new images
+    const addMedia = () => {
+      const mediaInput = document.getElementById("media-input");
+      
+      if(mediaInput) {
+        setMediaArray([...mediaArray, mediaInput.value]);
+        mediaInput.value = "";
+        setUrlInput("");
+        validateUrl(mediaInput.value);
+      }
+    };
+  
+    const removeMedia = (i) => {
+      setMediaArray(mediaArray.filter((media, index) => index !== i));
+    };
 
   if (isLoading) {
     return <div>...Loading</div>;
@@ -69,9 +115,34 @@ function goBack() {
         <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
           Back
         </div>
+        <ToastContainer />
       <h1 className="w-11/12 mt-10 mb-12 text-4xl font-medium">Create Venue</h1>
-      {/* <SliderComponent images={mediaFields.url} alt={mediaFields.alt} /> */}
+      {isError && <p className="error">Error: {isError}</p>}
+      {isSuccess && <div className="success">Venue was successfully created</div>}
+      <SliderComponent images={mediaArray} alt={mediaArray} />
+      <div className="flex flex-col gap-3 mx-auto mt-3">
+        {mediaArray.map((media, i) => (
+          <div key={i} className="flex items-center justify-between">
+            <p className="truncate">{media}</p>
+            <button type="button" onClick={() => removeMedia(i)} className="px-2 font-medium border rounded-lg bg-error hover:opacity-80">
+              X
+            </button>
+          </div>
+        ))}
+      </div>
       <form className="flex flex-col gap-5 mx-auto bg-white font-inder" onSubmit={handleSubmit(onSubmit)}>
+      <div>
+          <label className="flex flex-col">
+            image - Url
+            <input className="p-2 border rounded-lg" id="media-input" value={urlInput} pattern="/^(https?|ftp):\/\/(-\.)?([^\s/?.#-]+\.?)+(\/[^\s]*)?$/" onChange={handleUrlChange} type="url" />
+            {<p className="error-message">{urlError}</p>}
+          </label>
+        </div>
+        <div className="flex justify-between">
+          <button disabled={!!urlError} className="p-2 font-medium border rounded-lg bg-success disabled:bg-gray hover:opacity-80" type="button" onClick={addMedia}>
+            Add Media
+          </button>
+        </div>
         <label className="flex flex-col">
           name
           <input {...register("name")} className="p-2 border rounded-lg" type="text" />
@@ -83,25 +154,7 @@ function goBack() {
           <textarea {...register("description")} className="p-2 border rounded-lg" type="text"></textarea>
           <p className="error-message">{errors.description?.message}</p>
         </label>
-        {/* media start */}
-        {mediaFields.map((field, index) => (
-          <div key={index}>
-            <label className="flex flex-col">
-              image - Url {index}
-              <input {...register(`media[${index}]`)} className="p-2 border rounded-lg" type="url" />
-            </label>
-            {errors?.media?.[index]?.url && <p className="error-message">{errors.media[index].url.message}</p>}
-          </div>
-        ))}
-        <div className="flex justify-between">
-          <button className="p-2 border rounded-lg bg-success" type="button" onClick={addMediaField}>
-            Add Media
-          </button>
-          <button className="p-2 border rounded-lg bg-error" type="button" onClick={removeMediaField}>
-            Remove Media
-          </button>
-        </div>
-        {/* end */}
+        
         <label className="flex flex-col">
           price
           <input {...register("price")} className="p-2 border rounded-lg" type="number" />
@@ -159,14 +212,10 @@ function goBack() {
           <input {...register("location.continent")} className="p-2 border rounded-lg" type="text" />
           <p className="error-message">{errors.continent?.message}</p>
         </label>
-        <input className="p-2 border rounded-lg bg-success hover:cursor-pointer" type="submit" />
-        {isError && <p className="error">Error: {isError}</p>}
-        {isSuccess && <div className="success">Venue was successfully created</div>}
+        <input className="p-2 font-medium border rounded-lg bg-success hover:cursor-pointer hover:opacity-80" type="submit" />
       </form>
     </main>
   );
 }
 
 export default CreateVenue;
-
-// {/* disabled={isLoading} */}
