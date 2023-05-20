@@ -50,7 +50,7 @@ function Venue({ venueData }) {
   return (
     <>
       {isModalOpen && <BookingModal open={isModalOpen} venueId={venueData.id} venueGuests={venueData.maxGuests} bookingsArray={venueData.bookings} />}
-      <section className="my-60 w-3.5/7 mx-auto xl:w-desktop text-xl md-sm:text-2xl">
+      <section className="my-72 w-3.5/7 mx-auto xl:w-desktop text-xl md-sm:text-2xl">
         <div className="my-4 hover:underline hover:cursor-pointer" onClick={goBack}>
           Back
         </div>
@@ -68,11 +68,11 @@ function Venue({ venueData }) {
         <div className="flex flex-col gap-2">
           <LocationComponent location={venueData.location} id={venueData.id} />
           <p>Published: {date}</p>
-          <div className="flex gap-4">
-            {venueData.meta.wifi && <figure className="w-10 md-sm:w-14"><img src={WifiIcon} alt="wifi"/></figure>}
-            {venueData.meta.pets && <figure className="w-10 md-sm:w-14"><img src={PetsIcon} alt="pets"/></figure>}
-            {venueData.meta.parking && <figure className="w-10 md-sm:w-14"><img src={ParkingIcon} alt="parking"/></figure>}
-            {venueData.meta.breakfast && <figure className="w-10 md-sm:w-14"><img src={BreakfastIcon} alt="breakfast"/></figure>}
+          <div className="flex justify-end gap-4">
+            {venueData.meta.wifi && <figure className="w-10 md-sm:w-12"><img src={WifiIcon} alt="wifi"/></figure>}
+            {venueData.meta.pets && <figure className="w-10 md-sm:w-12"><img src={PetsIcon} alt="pets"/></figure>}
+            {venueData.meta.parking && <figure className="w-10 md-sm:w-12"><img src={ParkingIcon} alt="parking"/></figure>}
+            {venueData.meta.breakfast && <figure className="w-10 md-sm:w-12"><img src={BreakfastIcon} alt="breakfast"/></figure>}
           </div>
           <p className="pt-2 border-t border-gray">{venueData.description}</p>
 
@@ -93,7 +93,7 @@ function Venue({ venueData }) {
           <section className="w-full mt-20">
             <ProfileCard owner={venueData.owner} />
           </section>
-          {venueData.owner && user.name === venueData.owner.name && (
+          {user.name === venueData.owner.name && (
             <section>
               <div className="flex gap-4 mt-2">
                 <button className="flex-1 p-2 border rounded-lg bg-error hover:cursor-pointer" type="button" onClick={deleteVenue}>
