@@ -1,4 +1,6 @@
 function Categories({ categories }) {
+  // Create a system where you click on a category the name gets passed inn to a filter option like the search
+  // create checkboxes also to check off facilities.
   return (
     <div className="overflow-auto">
       <ul className="flex gap-4 pb-2 overflow-auto font-inder">
