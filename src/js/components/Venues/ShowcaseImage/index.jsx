@@ -10,7 +10,7 @@ function ShowcaseImage({ images, name }) {
 
   return (
     <div className="">
-      <img className="object-cover shadow-lg aspect-3/2 rounded-xl" key={uuidv4()} src={images} onError={handleItemImgError} alt={name} />
+      <img className="object-cover shadow-3xl aspect-3/2 rounded-xl" key={uuidv4()} src={images} onError={handleItemImgError} alt={name} />
     </div>
   );
 }
