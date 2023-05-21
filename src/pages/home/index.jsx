@@ -32,7 +32,7 @@ function Home() {
         (!filters.pets || (item.meta.hasOwnProperty("pets") && item.meta.pets)) &&
         (!filters.country || filters.country === "" || item.location.country === filters.country) &&
         (!filters.continent || filters.continent === "" || item.location.continent === filters.continent) &&
-        (!filters.guests || filters.guests === 0 || item.guests >= filters.guests)
+        (!filters.guests || filters.guests < 0 || item.maxGuests >= filters.guests)
     );
 
     if (!filters.wifi && !filters.breakfast && !filters.parking && !filters.pets && !filters.country && !filters.continent && !filters.guests) {
