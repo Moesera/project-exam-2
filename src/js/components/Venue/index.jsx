@@ -68,6 +68,7 @@ function Venue({ venueData }) {
         <div className="flex flex-col gap-2">
           <LocationComponent location={venueData.location} id={venueData.id} />
           <p>Published: {date}</p>
+          <p>Max guests: {venueData.maxGuests}</p>
           <div className="flex justify-end gap-4">
             {venueData.meta.wifi && <figure className="w-10 md-sm:w-12"><img src={WifiIcon} alt="wifi"/></figure>}
             {venueData.meta.pets && <figure className="w-10 md-sm:w-12"><img src={PetsIcon} alt="pets"/></figure>}
