@@ -4,6 +4,15 @@ const initialState = {
   data: [],
   searchInput: '',
   filteredData: [],
+  filters: {
+    wifi: false,
+    breakfast: false,
+    parking: false,
+    pets: false,
+    country: '',
+    continent: '',
+    guests: 0,
+  },
 };
 
 export const searchSlice = createSlice({
@@ -13,12 +22,12 @@ export const searchSlice = createSlice({
     setSearchInput: (state, action) => {
       state.searchInput = action.payload;
     },
-    setFilteredData: (state, action) => {
-      state.filteredData = action.payload;
-    },
+    setFilters: (state, action) => {
+      state.filters = action.payload;
+      },
   },
 });
 
-export const { setSearchInput, setFilteredData } = searchSlice.actions;
+export const { setSearchInput, setFilters } = searchSlice.actions;
 
 export default searchSlice.reducer;
