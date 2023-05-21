@@ -7,19 +7,10 @@ import WifiIcon from "../../../../../assets/interface/meta/icons8-wifi-64.png";
 import BreakfastIcon from "../../../../../assets/interface/meta/icons8-breakfast-64.png";
 import ParkingIcon from "../../../../../assets/interface/meta/icons8-parking-64.png";
 import PetsIcon from "../../../../../assets/interface/meta/icons8-pets-64.png";
-import { useEffect } from "react";
 
 export default function FilterOptions() {
   const filters = useSelector((state) => state.search?.filters);
 
-  useEffect(() => {
-    const wifi = document.getElementById("wifi").checked;
-    const breakfast = document.getElementById("breakfast").checked;
-    const parking = document.getElementById("parking").checked;
-    const pets = document.getElementById("pets").checked;
-
-    // checkValue(wifi, breakfast, parking, pets)
-  })
   function checkValue(e) {
     const checkbox = e.target;
     const label = checkbox.parentElement;
@@ -74,20 +65,20 @@ console.log(guests)
       <h2>Facilities</h2>
       <section className="flex gap-4">
         <label>
-          <input onClick={checkValue} className="hidden" id="wifi" name="wifi" type="checkbox" defaultChecked={filters.wifi}/>
-          <img className="w-24 p-2 border border-white rounded-lg hover:cursor-pointer" src={WifiIcon} alt="wifi" />
+          <input onClick={checkValue} className={`hidden`} id="wifi" name="wifi" type="checkbox" defaultChecked={filters.wifi}/>
+          <img className={`${filters.wifi ? 'w-24 p-2 border rounded-lg hover:cursor-pointer' : 'w-24 p-2 border border-white rounded-lg hover:cursor-pointer'}`} src={WifiIcon} alt="wifi" />
         </label>
         <label>
-          <input onClick={checkValue} className="hidden" id="breakfast" name="breakfast" type="checkbox" defaultChecked={filters.breakfast}/>
-          <img className="w-24 p-2 border border-white rounded-lg hover:cursor-pointer" src={BreakfastIcon} alt="breakfast" />
+          <input onClick={checkValue} className={`hidden`} id="breakfast" name="breakfast" type="checkbox" defaultChecked={filters.breakfast}/>
+          <img className={`${filters.breakfast ? 'w-24 p-2 border rounded-lg hover:cursor-pointer' : 'w-24 p-2 border border-white rounded-lg hover:cursor-pointer'}`} src={BreakfastIcon} alt="breakfast" />
         </label>
         <label>
-          <input onClick={checkValue} className="hidden" id="parking" name="parking" type="checkbox" defaultChecked={filters.parking} />
-          <img className="w-24 p-2 border border-white rounded-lg hover:cursor-pointer" src={ParkingIcon} alt="parking" />
+          <input onClick={checkValue} className={`hidden`} id="parking" name="parking" type="checkbox" defaultChecked={filters.parking} />
+          <img className={`${filters.parking ? 'w-24 p-2 border rounded-lg hover:cursor-pointer' : 'w-24 p-2 border border-white rounded-lg hover:cursor-pointer'}`} src={ParkingIcon} alt="parking" />
         </label>
         <label>
-          <input onClick={checkValue} className="hidden" id="pets" name="pets" type="checkbox" defaultChecked={filters.pets}/>
-          <img className="w-24 p-2 border border-white rounded-lg hover:cursor-pointer" src={PetsIcon} alt="pets" />
+          <input onClick={checkValue} className={`hidden`} id="pets" name="pets" type="checkbox" defaultChecked={filters.pets}/>
+          <img className={`${filters.pets ? 'w-24 p-2 border rounded-lg hover:cursor-pointer' : 'w-24 p-2 border border-white rounded-lg hover:cursor-pointer'}`} src={PetsIcon} alt="pets" />
         </label>
       </section>
       <section className="flex flex-col gap-3">
