@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setFilteredData } from "../../js/hooks/search/search";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import { useGet } from "../../js/hooks/service/get";
 import { venues } from "../../js/helpers/constant";
@@ -8,20 +7,59 @@ import { venues } from "../../js/helpers/constant";
 import Venues from "../../js/components/Venues";
 
 function Home() {
+
   const { data, isLoading, isError } = useGet(venues);
-  const dispatch = useDispatch();
+  const [originalData, setOriginalData] = useState([]);
+  const [filterData, setFilterData] = useState([]);
+  const [searchData, setSearchData] = useState([]);
+
   const searchInput = useSelector((state) => state.search?.searchInput);
-  const filteredData = useSelector((state) => state.search.filteredData);
+  const filters = useSelector((state) => state.search?.filters);
+
 
   useEffect(() => {
-    const filteredData = data.filter((item) => item.name.toLowerCase().includes(searchInput.toLowerCase()));
-    dispatch(setFilteredData(filteredData));
-  }, [data, searchInput, dispatch]);
+    if (data) {
+      setOriginalData(data);
+    }
+  }, [data]);
 
+  useEffect(() => {
+    const filteredData = originalData.filter(
+      (item) =>
+        (!filters.wifi || (item.meta.hasOwnProperty("wifi") && item.meta.wifi)) &&
+        (!filters.breakfast || (item.meta.hasOwnProperty("breakfast") && item.meta.breakfast)) &&
+        (!filters.parking || (item.meta.hasOwnProperty("parking") && item.meta.parking)) &&
+        (!filters.pets || (item.meta.hasOwnProperty("pets") && item.meta.pets)) &&
+        (!filters.country || filters.country === "" || item.location.country === filters.country) &&
+        (!filters.continent || filters.continent === "" || item.location.continent === filters.continent) &&
+        (!filters.guests || filters.guests === 0 || item.guests >= filters.guests)
+    );
+
+    if (!filters.wifi && !filters.breakfast && !filters.parking && !filters.pets && !filters.country && !filters.continent && !filters.guests) {
+      setFilterData(originalData);
+    }
+
+    setFilterData(filteredData);
+  }, [filters, originalData]);
+
+  useEffect(() => {
+    const searchData = filterData.filter(
+      (item) =>
+        item.name.toLowerCase().includes(searchInput.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchInput.toLowerCase()) ||
+        item.location.continent.toLowerCase().includes(searchInput.toLowerCase()) ||
+        item.location.city.toLowerCase().includes(searchInput.toLowerCase()) ||
+        item.location.country.toLowerCase().includes(searchInput.toLowerCase())
+    );
+
+    setSearchData(searchData);
+  }, [originalData, searchInput, filterData]);
+
+  console.log(searchData);
   return (
     <main className="pt-72 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
       <h1 className="sr-only">Homepage</h1>
-      <Venues data={filteredData} isLoading={isLoading} isError={isError} />
+      <Venues data={searchData} isLoading={isLoading} isError={isError} />
     </main>
   );
 }
