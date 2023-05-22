@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function useRegister(url) {
   const [isSuccess, setIsSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(null);
 
   async function register(options) {

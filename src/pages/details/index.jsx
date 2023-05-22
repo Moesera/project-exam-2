@@ -7,7 +7,7 @@ import Venue from "../../js/components/Venue";
 function Details() {
   let { id } = useParams();
   const { data, isLoading, isError } = useGet(venues + id + "?_owner=true&_bookings=true");
-
+  
   if (isLoading) {
     return <div>Loading</div>;
   }
@@ -16,12 +16,14 @@ function Details() {
     return <div>Error</div>;
   }
 
+  if(data) {
     return (
       <main>
         <h1>{data.name}</h1>
         <Venue venueData={data} />
       </main>
     );
+  }
 }
 
 export default Details;
