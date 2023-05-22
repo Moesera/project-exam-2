@@ -55,7 +55,6 @@ function Home() {
     setSearchData(searchData);
   }, [originalData, searchInput, filterData]);
 
-  console.log(searchData);
   return (
     <main className="pt-72 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
       <h1 className="sr-only">Homepage</h1>

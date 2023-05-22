@@ -16,7 +16,7 @@ import PopupModal from "../../js/components/Modal/index";
 import RegisterForm from "../../js/components/Register";
 import LoginForm from "../../js/components/Login";
 import ProfileButton from "../../js/components/ProfileButton";
-import FilterModal from "../../js/components/FilterModal/Modal";
+import FilterModal from "../../js/components/FilterModal";
 
 function Nav() {
   const isModalOpen = useSelector((state) => state.modal?.isOpen);
@@ -30,7 +30,6 @@ function Nav() {
 
   function handleSearch(e) {
       const input = e.target.value;
-      console.log(input);
       dispatch(setSearchInput(input));
   }
 
