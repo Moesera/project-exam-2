@@ -1,6 +1,6 @@
 import Modal from "react-responsive-modal";
 import { useDispatch } from "react-redux";
-import { closeFiltering } from "../../../hooks/filterModal";
+import { closeFiltering } from "../../hooks/filterModal";
 
 import FilterOptions from "./FilterOptions";
 

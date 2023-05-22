@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { closeFiltering } from "../../../../hooks/filterModal";
-import { setFilters } from "../../../../hooks/search/search";
+import { closeFiltering } from "../../../hooks/filterModal";
+import { setFilters } from "../../../hooks/search/search";
 
 
-import WifiIcon from "../../../../../assets/interface/meta/icons8-wifi-64.png";
-import BreakfastIcon from "../../../../../assets/interface/meta/icons8-breakfast-64.png";
-import ParkingIcon from "../../../../../assets/interface/meta/icons8-parking-64.png";
-import PetsIcon from "../../../../../assets/interface/meta/icons8-pets-64.png";
+import WifiIcon from "../../../../assets/interface/meta/icons8-wifi-64.png";
+import BreakfastIcon from "../../../../assets/interface/meta/icons8-breakfast-64.png";
+import ParkingIcon from "../../../../assets/interface/meta/icons8-parking-64.png";
+import PetsIcon from "../../../../assets/interface/meta/icons8-pets-64.png";
 
 export default function FilterOptions() {
   const filters = useSelector((state) => state.search?.filters);
@@ -32,14 +32,6 @@ export default function FilterOptions() {
     const country = document.querySelector("#country option:checked").value;
     const continent = document.querySelector("#continent option:checked").value;
     const guests = document.querySelector("#guests").value;
-
-console.log(wifi)
-console.log(breakfast)
-console.log(parking)
-console.log(pets)
-console.log(country)
-console.log(continent)
-console.log(guests)
 
     dispatch(
       setFilters({
