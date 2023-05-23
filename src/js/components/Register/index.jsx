@@ -92,7 +92,7 @@ function RegisterForm({ setShow }) {
   }
 
   return (
-    <div className="flex flex-col justify-center min-h-full">
+    <div className="flex flex-col justify-center min-h-full my-5">
       <div className="mx-auto w-4/7">
         <p onClick={() => setShow(true)} className="mb-4 cursor-pointer">
           Back
