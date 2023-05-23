@@ -34,7 +34,7 @@ import { closeLoginModal } from "../../../hooks/loginModal";
  *
  * ```
  */
-export default function PopupModal({ show, setShow, components, open }) {
+export default function LoginModal({ show, setShow, components, open }) {
   const dispatch = useDispatch();
   // I need to set these values to header to pass it down to PopupModal (DONE)
   const Component1 = components[0];
@@ -45,7 +45,7 @@ export default function PopupModal({ show, setShow, components, open }) {
       <Modal
         classNames={{
           overlay: "fixed inset-0 bottom-[7.6rem] bg-white bg-opacity-50",
-          modal: "fixed bg-white inset-0 bottom-[7.6rem] w-full z-50",
+          modal: "fixed bg-white inset-0 bottom-[7.6rem] w-full z-50 md:bottom-0 overflow-y-scroll",
         }}
         open={open}
         onClose={() => dispatch(closeLoginModal())}
