@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ChevronRight from "../../../../assets/interface/icons8-chevron-right.png";
 import PlaceholderAvatar from "../../../../assets/images/placeholder/placeholder-profile.jpg";
 import { handleAvatarImgError } from "../../../helpers/placeholder";
-import { openModal } from "../../../hooks/modal";
+import { openLoginModal } from "../../../hooks/loginModal";
 
 function ProfileCard({ owner }) {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ function ProfileCard({ owner }) {
     }
 
     return (
-      <Link onClick={() => dispatch(openModal())} className="flex items-center gap-4 px-4 py-6 rounded-lg shadow-3xl group/item">
+      <Link onClick={() => dispatch(openLoginModal())} className="flex items-center gap-4 px-4 py-6 rounded-lg shadow-3xl group/item">
         <figure className="w-[4.5rem] h-[4.5rem] md-sm:w-[6rem] md-sm:h-[6rem]">
           <img className="object-cover w-full h-full rounded-full shadow-3xl" src={avatar} onError={handleAvatarImgError} alt="user avatar" />
         </figure>

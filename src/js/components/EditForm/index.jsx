@@ -203,8 +203,8 @@ function EditForm({ setShowForm, venueData }) {
           <p className="error-message">{errors.description?.message}</p>
         </label>
         <input className="p-2 border rounded-lg bg-success hover:cursor-pointer" type="submit" />
-        {isError && <p className="error">Error: {isError}</p>}
-        {isSuccess && <div className="success">Venue was successfully updated</div>}
+        {isError && <p className="mt-2 error">Error: {isError}</p>}
+        {isSuccess && <div className="mt-2 success">Avatar was successfully updated</div>}
       </form>
     </section>
   );

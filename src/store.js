@@ -1,14 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import modalSlice from "./js/hooks/modal";
+import loginModalSlice from "./js/hooks/loginModal";
 import userAuthSlice from "./js/hooks/userAuth";
 import bookingSlice from "./js/hooks/bookingModal";
 import searchSlice from "./js/hooks/search/search";
-import filteringSlice from "./js/hooks/filterModal";
+import modalSlice from "./js/hooks/modal";
 
 export const store = configureStore({
   reducer: {
     // Handles the open and closing of the modal
-    modal: modalSlice,
+    loginModal: loginModalSlice,
 
     // modal for bookings
     booking: bookingSlice,
@@ -19,6 +19,6 @@ export const store = configureStore({
     // search functionality
     search: searchSlice,
 
-    filtering: filteringSlice,
+    modal: modalSlice,
   },
 });

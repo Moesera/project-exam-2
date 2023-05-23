@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { closeFiltering } from "../../../hooks/filterModal";
-import { setFilters } from "../../../hooks/search/search";
+import { closeModal } from "../../hooks/modal";
+import { setFilters } from "../../hooks/search/search";
 
 
-import WifiIcon from "../../../../assets/interface/meta/icons8-wifi-64.png";
-import BreakfastIcon from "../../../../assets/interface/meta/icons8-breakfast-64.png";
-import ParkingIcon from "../../../../assets/interface/meta/icons8-parking-64.png";
-import PetsIcon from "../../../../assets/interface/meta/icons8-pets-64.png";
+import WifiIcon from "../../../assets/interface/meta/icons8-wifi-64.png";
+import BreakfastIcon from "../../../assets/interface/meta/icons8-breakfast-64.png";
+import ParkingIcon from "../../../assets/interface/meta/icons8-parking-64.png";
+import PetsIcon from "../../../assets/interface/meta/icons8-pets-64.png";
 
 export default function FilterOptions() {
   const filters = useSelector((state) => state.search?.filters);
@@ -50,7 +50,7 @@ export default function FilterOptions() {
   return (
     <div className="w-[95%] mx-auto">
       <div className="flex justify-end">
-      <button className="px-2 mt-2 mb-2 font-medium border rounded-lg hover:opacity-90 bg-error" onClick={() => dispatch(closeFiltering())}>
+      <button className="px-2 mt-2 mb-2 font-medium border rounded-lg hover:opacity-90 bg-error" onClick={() => dispatch(closeModal())}>
         X
       </button>
       </div>

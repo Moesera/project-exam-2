@@ -82,14 +82,6 @@ function goBack() {
     reset();
   }
 
-  // const addMediaField = () => {
-  //   setMediaFields([...mediaFields, { url: "" }]);
-  // };
-
-  // const removeMediaField = () => {
-  //   setMediaFields(mediaFields.slice(0, -1));
-  // };
-
     //  adding new images
     const addMedia = () => {
       const mediaInput = document.getElementById("media-input");

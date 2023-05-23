@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import useLogin from "./../../hooks/service/login";
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../hooks/modal";
+import { closeLoginModal } from "../../hooks/loginModal";
 
 import RegisterImage from "../../../assets/interface/icons8-add-user-male-100.png";
 import { login } from "../../helpers/constant";
@@ -17,7 +17,7 @@ function LoginForm({ setShow }) {
 
   const resetForm = useCallback(() => {
     setTimeout(() => {
-      dispatch(closeModal());
+      dispatch(closeLoginModal());
     }, 3500);
   }, [dispatch]);
 
@@ -48,7 +48,7 @@ function LoginForm({ setShow }) {
   return (
     <div className="flex flex-col justify-center min-h-full">
       <div className="mx-auto w-4/7">
-      <p onClick={() => dispatch(closeModal())} className="mb-4 cursor-pointer">Back</p>
+      <p onClick={() => dispatch(closeLoginModal())} className="mb-4 cursor-pointer">Back</p>
       </div>
       <h2 className="w-11/12 mx-auto mb-12 text-4xl font-medium text-center">Log in to your account</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-5 mx-auto bg-white w-4/7">
