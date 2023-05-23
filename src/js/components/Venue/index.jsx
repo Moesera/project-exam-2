@@ -20,16 +20,19 @@ import WifiIcon from "../../../assets/interface/meta/icons8-wifi-64.png";
 import BreakfastIcon from "../../../assets/interface/meta/icons8-breakfast-64.png";
 import ParkingIcon from "../../../assets/interface/meta/icons8-parking-64.png";
 import PetsIcon from "../../../assets/interface/meta/icons8-pets-64.png";
+import { openLoginModal } from "../../hooks/loginModal";
 
 function Venue({ venueData }) {
   const isModalOpen = useSelector((state) => state.booking?.isOpen);
+  const isLoggedIn = useSelector((state) => state.userAuth?.isLoggedIn);
+
   const dispatch = useDispatch();
+  const goBack = useGoBack();
+  const date = convertDate(venueData.updated);
   const [showForm, setShowForm] = useState(false);
   const { id } = useParams();
   const { apiData } = useApi(venues + id);
   const user = getItem("user");
-
-  const goBack = useGoBack();
 
   function deleteVenue() {
     const method = "DELETE";
@@ -41,8 +44,8 @@ function Venue({ venueData }) {
     setShowForm(true);
   }
 
-  const date = convertDate(venueData.updated)
-  console.log(venueData)
+
+
   if (showForm) {
     return <EditForm setShowForm={setShowForm} venueData={venueData} />;
   }
@@ -70,10 +73,26 @@ function Venue({ venueData }) {
           <p>Published: {date}</p>
           <p>Max guests: {venueData.maxGuests}</p>
           <div className="flex justify-end gap-4">
-            {venueData.meta.wifi && <figure className="w-10 md-sm:w-12"><img src={WifiIcon} alt="wifi"/></figure>}
-            {venueData.meta.pets && <figure className="w-10 md-sm:w-12"><img src={PetsIcon} alt="pets"/></figure>}
-            {venueData.meta.parking && <figure className="w-10 md-sm:w-12"><img src={ParkingIcon} alt="parking"/></figure>}
-            {venueData.meta.breakfast && <figure className="w-10 md-sm:w-12"><img src={BreakfastIcon} alt="breakfast"/></figure>}
+            {venueData.meta.wifi && (
+              <figure className="w-10 md-sm:w-12">
+                <img src={WifiIcon} alt="wifi" />
+              </figure>
+            )}
+            {venueData.meta.pets && (
+              <figure className="w-10 md-sm:w-12">
+                <img src={PetsIcon} alt="pets" />
+              </figure>
+            )}
+            {venueData.meta.parking && (
+              <figure className="w-10 md-sm:w-12">
+                <img src={ParkingIcon} alt="parking" />
+              </figure>
+            )}
+            {venueData.meta.breakfast && (
+              <figure className="w-10 md-sm:w-12">
+                <img src={BreakfastIcon} alt="breakfast" />
+              </figure>
+            )}
           </div>
           <p className="pt-2 border-t border-gray">{venueData.description}</p>
 
@@ -84,9 +103,15 @@ function Venue({ venueData }) {
                 <p>night</p>
               </div>
               <div>
-                <button onClick={() => dispatch(openBooking())} className="px-4 py-2 font-medium text-white shadow-3xl rounded-xl bg-ocean hover:bg-opacity-90">
-                  Book venue
-                </button>
+                {isLoggedIn ? (
+                  <button onClick={() => dispatch(openBooking())} className="px-4 py-2 font-medium text-white shadow-3xl rounded-xl bg-ocean hover:bg-opacity-90">
+                    Book venue
+                  </button>
+                ) : (
+                  <button onClick={() => dispatch(openLoginModal())} className="px-4 py-2 font-medium text-white shadow-3xl rounded-xl bg-ocean hover:bg-opacity-90">
+                    Book venue
+                  </button>
+                )}
               </div>
             </div>
           </section>
