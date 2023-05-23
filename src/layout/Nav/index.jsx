@@ -11,7 +11,7 @@ import FilterIcon from "../../assets/interface/icons8-tune-50.png";
 import BookingIcon from "../../assets/interface/icons8-booking-80.png";
 import ExploreIcon from "../../assets/interface/icons8-compass-64.png";
 
-import PopupModal from "../../js/components/Login/Modal/index";
+import LoginModal from "../../js/components/Login/Modal/index";
 import RegisterForm from "../../js/components/Register";
 import LoginForm from "../../js/components/Login";
 import ProfileButton from "../../js/components/ProfileButton";
@@ -36,7 +36,7 @@ function Nav() {
   return (
     <>
       {isModalOpen && <ModalPopup open={isModalOpen} searchInput={searchInput} content={FilterOptions} />}
-      {isLoginModalOpen && <PopupModal show={showLogin} setShow={setShowLogin} components={components} open={isLoginModalOpen} />}
+      {isLoginModalOpen && <LoginModal show={showLogin} setShow={setShowLogin} components={components} open={isLoginModalOpen} />}
       {/* Search */}
       <section className="flex w-3.5/7 items-center xl:w-desktop gap-3">
         <input defaultValue={searchInput} onKeyUp={handleSearch} className="pl-20 h-16.5 rounded-full bg-white w-full shadow-3xl" type="text" placeholder="Search venues" />
