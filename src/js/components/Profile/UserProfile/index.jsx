@@ -2,6 +2,8 @@ import removeItem from "../../../localStorage/removeItem";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGoBack } from "../../../hooks/tools/useGoBack";
+import { useDispatch } from "react-redux";
+import { setIsLoggedIn } from "../../../hooks/userAuth";
 
 import CardComponent from "../../Card/index";
 import CreateVenue from "../../CreateVenue";
@@ -19,6 +21,7 @@ import SupportIcon from "../../../../assets/interface/icons8-technical-support-1
 function UserProfileManager({ userData, venuesData, setShowUserProfile }) {
   const navigate = useNavigate();
   const goBack = useGoBack();
+  const dispatch = useDispatch();
 
   const [activeComponent, setActiveComponent] = useState(null);
 
@@ -30,6 +33,7 @@ function UserProfileManager({ userData, venuesData, setShowUserProfile }) {
     removeItem("token");
     removeItem("user");
     navigate("/");
+    dispatch(setIsLoggedIn(false));
   }
 
   // i set an initial state as showing the cards and everything,
