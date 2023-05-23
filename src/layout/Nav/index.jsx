@@ -11,7 +11,6 @@ import FilterIcon from "../../assets/interface/icons8-tune-50.png";
 import BookingIcon from "../../assets/interface/icons8-booking-80.png";
 import ExploreIcon from "../../assets/interface/icons8-compass-64.png";
 
-
 import PopupModal from "../../js/components/Login/Modal/index";
 import RegisterForm from "../../js/components/Register";
 import LoginForm from "../../js/components/Login";
@@ -30,13 +29,13 @@ function Nav() {
   const [showLogin, setShowLogin] = useState(true);
 
   function handleSearch(e) {
-      const input = e.target.value;
-      dispatch(setSearchInput(input));
+    const input = e.target.value;
+    dispatch(setSearchInput(input));
   }
 
   return (
     <>
-    {isModalOpen && <ModalPopup open={isModalOpen} searchInput={searchInput} content={FilterOptions}/>}
+      {isModalOpen && <ModalPopup open={isModalOpen} searchInput={searchInput} content={FilterOptions} />}
       {isLoginModalOpen && <PopupModal show={showLogin} setShow={setShowLogin} components={components} open={isLoginModalOpen} />}
       {/* Search */}
       <section className="flex w-3.5/7 items-center xl:w-desktop gap-3">
@@ -46,8 +45,8 @@ function Nav() {
             <img className="w-10" src={SearchIcon} alt="search" />
           </Link>
         </label>
-        <div onClick={() => dispatch(openModal())} className="absolute p-2 border rounded-full right-[12%] hover:shadow-inner hover:cursor-pointer md:right-[38%]">
-          <img className="w-9" src={FilterIcon} alt="filter" />
+        <div onClick={() => dispatch(openModal())} className="absolute p-2 border rounded-full right-[12%] hover:shadow-inner hover:cursor-pointer md:right-[38%] xl:static">
+          <img className="w-9 xl:w-14" src={FilterIcon} alt="filter" />
         </div>
         {/* Navbar */}
         <nav className="fixed inset-x-0 bottom-0 flex self-center justify-center p-4 bg-white border md:static md:w-2/4 md:p-0 md:border-none border-light-gray font-inder">
