@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { handleUserAuth } from "../../authentication/userAuth";
 import { useDispatch } from 'react-redux';
-import { openModal } from '../../hooks/modal';
+import { openLoginModal } from '../../hooks/loginModal';
 
 import ProfileIcon from "../../../assets/interface/icons8-male-user-64.png";
 
@@ -26,7 +26,7 @@ const dispatch = useDispatch();
           </li>
       ) : (
         <li className="min-w-[5rem] p-2 hover:cursor-pointer border-b-4 hover:border-gray border-white">
-        <Link onClick={() => dispatch(openModal())} className="flex flex-col items-center text-base ">
+        <Link onClick={() => dispatch(openLoginModal())} className="flex flex-col items-center text-base ">
           <img className="w-12" src={ProfileIcon} alt="profile img" />
           login
         </Link>

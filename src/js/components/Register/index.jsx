@@ -133,10 +133,6 @@ function RegisterForm({ setShow }) {
         <div className="flex flex-col font-inder">
           Avatar
           <div id="avatarContainer" ref={avatarContainerRef} className="flex gap-4" onChange={handleAvatarChange}>
-            {/* Create this one again with the chosen image from the user
-             on the button click bring up a popup to insert the url and then apply
-             it to the component creating and depend it to the avatarContainer
-             */}
             <label>
               <input className="hidden" type="radio" id="preset" name="avatar" value={AvatarPlaceholder} />
               <figure className="w-20 h-20 p-2 rounded-lg shadow-3xl hover:cursor-pointer hover:border hover:border-gray">
