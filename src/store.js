@@ -4,6 +4,7 @@ import userAuthSlice from "./js/hooks/userAuth";
 import bookingSlice from "./js/hooks/bookingModal";
 import searchSlice from "./js/hooks/search/search";
 import modalSlice from "./js/hooks/modal";
+import offsetSlice from "./js/hooks/search/offset";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
 
     // search functionality
     search: searchSlice,
+    offset: offsetSlice,
 
     modal: modalSlice,
   },
