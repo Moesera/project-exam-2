@@ -32,7 +32,7 @@ import { getItem } from "../../localStorage/getItem";
  * }
  * ```
  */
-export function useGet(url) {
+export function useGet(url, offset, limit) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -55,7 +55,7 @@ export function useGet(url) {
         let dataResults;
 
         if (checkAuthAndFetch(url)) {
-          dataResults = await fetch(url, options);
+          dataResults = await fetch(`${url}?limit=${limit}&offset=${offset}`, options);
           if(dataResults.errors && dataResults.errors.length > 0) {
             const errorMessage = data.errors[0].message;
             throw new Error(errorMessage);
@@ -79,7 +79,7 @@ export function useGet(url) {
     }
 
     getData();
-  }, [url, options, data.errors]);
+  }, [url, options, data.errors, offset]);
 
   if (data) {
     return { data, isLoading, isError };
