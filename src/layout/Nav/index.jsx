@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { closeLoginModal, openLoginModal } from "../../js/hooks/loginModal";
 import { setSearchInput } from "../../js/hooks/search/search";
 import { openModal } from "../../js/hooks/modal";
+import { incrementOffset, decrementOffset, resetOffset } from '../../js/hooks/search/offset';
 
 // images
 import SearchIcon from "../../assets/interface/icons8-search-30.png";
@@ -31,6 +32,14 @@ function Nav() {
   function handleSearch(e) {
     const input = e.target.value;
     dispatch(setSearchInput(input));
+    
+    if (input.length > searchInput.length) {
+      dispatch(incrementOffset(100));
+    } else if (input.length < searchInput.length) {
+      dispatch(decrementOffset(100));
+    } else if (input.length > 0) {
+      resetOffset();
+    }
   }
 
   let user = JSON.parse(localStorage.getItem("user"));
