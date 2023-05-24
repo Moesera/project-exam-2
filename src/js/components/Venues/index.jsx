@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { convertDate } from "../../helpers/convertDate";
 
 import StarIcon from "../../../assets/interface/icons8-star-32.png";
 
@@ -31,9 +32,9 @@ function Venues({ data, isLoading, isError }) {
             </div>
 
             <div className="flex flex-col gap-1">
-              <LocationComponent location={venue.location} />
-              <p className="flex-grow">{venue.updated}</p>
-              <div className="flex gap-4">
+              {venue.location.continent ? <LocationComponent location={venue.location} /> : <p>Europe</p>}
+              <p className="flex-grow">{convertDate(venue.updated)}</p>
+              <div className="flex gap-4 mt-auto ">
                 <h3 className="font-semibold">{venue.price} kr</h3>
                 <p>night</p>
               </div>
