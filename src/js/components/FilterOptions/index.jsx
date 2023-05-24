@@ -48,9 +48,9 @@ export default function FilterOptions() {
 
   const dispatch = useDispatch();
   return (
-    <div className="w-[95%] mx-auto">
+    <div className="w-[95%] mx-auto mb-2">
       <div className="flex justify-end">
-      <button className="px-2 mt-2 mb-2 font-medium border rounded-lg hover:opacity-90 bg-error" onClick={() => dispatch(closeModal())}>
+      <button className="px-2 mt-2 mb-2 font-medium border rounded-lg md-sm:mt-4 hover:opacity-90 bg-error" onClick={() => dispatch(closeModal())}>
         X
       </button>
       </div>
