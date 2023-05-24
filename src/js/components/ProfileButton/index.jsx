@@ -6,7 +6,7 @@ import { openLoginModal } from '../../hooks/loginModal';
 
 import ProfileIcon from "../../../assets/interface/icons8-male-user-64.png";
 
-function ProfileButton({ setShow, isLoggedIn }) {
+function ProfileButton({ isLoggedIn }) {
   
 const dispatch = useDispatch();
 
