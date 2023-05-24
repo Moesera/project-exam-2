@@ -81,9 +81,9 @@ function Booking({ venueId, venueGuests, bookingsArray }) {
   return (
     <section className="w-[25rem] h-[40rem] m-2 p-2">
       <div>
-        <button className="mb-2 hover:underscore" onClick={() => dispatch(closeBooking())}>
-          close
-        </button>
+      <button className="px-2 mt-1 mb-2 font-medium border rounded-lg hover:opacity-90 bg-error" onClick={() => dispatch(closeBooking())}>
+        X
+      </button>
       </div>
       <h2>Booking</h2>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
