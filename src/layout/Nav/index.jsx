@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { closeLoginModal } from "../../js/hooks/loginModal";
+import { closeLoginModal, openLoginModal } from "../../js/hooks/loginModal";
 import { setSearchInput } from "../../js/hooks/search/search";
 import { openModal } from "../../js/hooks/modal";
 
@@ -33,6 +33,8 @@ function Nav() {
     dispatch(setSearchInput(input));
   }
 
+  let user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <>
       {isModalOpen && <ModalPopup open={isModalOpen} searchInput={searchInput} content={FilterOptions} />}
@@ -57,13 +59,22 @@ function Nav() {
                 Explore
               </Link>
             </li>
+            {isLoggedIn ?
             <li className="min-w-[5rem] p-2 hover:cursor-pointer border-b-4 hover:border-gray border-white">
-              <Link onClick={() => dispatch(closeLoginModal())} className="flex flex-col items-center text-base">
+              <Link onClick={() => dispatch(closeLoginModal())} to={`/profile/${user.name}`} className="flex flex-col items-center text-base">
                 <img className="w-12" src={BookingIcon} alt="bookings img" />
                 Bookings
               </Link>
-            </li>
-            <ProfileButton setShow={setShowLogin} isLoggedIn={isLoggedIn} />
+            </li> 
+            :
+            <li className="min-w-[5rem] p-2 hover:cursor-pointer border-b-4 hover:border-gray border-white">
+            <Link onClick={() => dispatch(openLoginModal())} className="flex flex-col items-center text-base">
+              <img className="w-12" src={BookingIcon} alt="bookings img" />
+              Bookings
+            </Link>
+          </li> 
+            }
+            <ProfileButton user={user} isLoggedIn={isLoggedIn} />
           </ul>
         </nav>
       </section>
