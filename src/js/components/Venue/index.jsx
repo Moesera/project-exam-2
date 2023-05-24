@@ -44,8 +44,6 @@ function Venue({ venueData }) {
     setShowForm(true);
   }
 
-
-
   if (showForm) {
     return <EditForm setShowForm={setShowForm} venueData={venueData} />;
   }
@@ -53,7 +51,7 @@ function Venue({ venueData }) {
   return (
     <>
       {isModalOpen && <BookingModal open={isModalOpen} venueId={venueData.id} venueGuests={venueData.maxGuests} bookingsArray={venueData.bookings} />}
-      <section className="my-72 w-3.5/7 mx-auto xl:w-desktop text-xl md-sm:text-2xl">
+      <section className="pt-40 w-3.5/7 mx-auto xl:w-desktop text-xl md-sm:text-2xl">
         <div className="my-4 hover:underline hover:cursor-pointer" onClick={goBack}>
           Back
         </div>
