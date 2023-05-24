@@ -56,7 +56,7 @@ function Home() {
   }, [originalData, searchInput, filterData]);
 
   return (
-    <main className="pt-72 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
+    <main className="pt-40 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
       <h1 className="sr-only">Homepage</h1>
       <Venues data={searchData} isLoading={isLoading} isError={isError} />
     </main>
