@@ -7,8 +7,9 @@ import { venues } from "../../js/helpers/constant";
 import Venues from "../../js/components/Venues";
 
 function Home() {
-
-  const { data, isLoading, isError } = useGet(venues);
+  const limit = 100;
+  const offset = useSelector((state) => state?.offset);
+  const { data, isLoading, isError } = useGet(venues, offset, limit);
   const [originalData, setOriginalData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [searchData, setSearchData] = useState([]);
@@ -54,6 +55,8 @@ function Home() {
 
     setSearchData(searchData);
   }, [originalData, searchInput, filterData]);
+console.log(searchData);
+console.log(offset);
 
   return (
     <main className="pt-40 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
