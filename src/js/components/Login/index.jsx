@@ -47,11 +47,11 @@ function LoginForm({ setShow }) {
 
   return (
     <div className="flex flex-col justify-center min-h-full my-5">
-      <div className="mx-auto w-4/7">
+      <div className="mx-auto w-4/7 md:w-[60rem]">
       <p onClick={() => dispatch(closeLoginModal())} className="mb-4 cursor-pointer">Back</p>
       </div>
       <h2 className="w-11/12 mx-auto mb-12 text-4xl font-medium text-center">Log in to your account</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5 mx-auto bg-white w-4/7">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5 mx-auto bg-white w-4/7 md:w-[60rem]">
         <label className="flex flex-col font-inder">
           Email
           <input className="p-2 border rounded-lg" type="text" value={email} onChange={(event) => setEmail(event.target.value)} autoComplete="email" required />
@@ -74,12 +74,12 @@ function LoginForm({ setShow }) {
         {isSuccess && <div className="success">Login successful, you will be redirected shortly</div>}
       </form>
 
-      <section className="mx-auto mt-20 w-4/7">
+      <section className="mx-auto mt-20 w-4/7 md:w-[60rem]">
         <p className="text-center">If you do not have an account yet create one by clicking the box below</p>
         <button type="button" onClick={ShowRegister} className="flex items-center justify-between w-full px-4 py-2 border border-white mt-14 rounded-xl shadow-3xl hover:border hover:border-gray">
           <div className="text-left basis-[90%]">
-            <h3 className="text-lg font-semibold">Register an account with us</h3>
-            <p className="text-base">You want to rent your venue or rent a venue, register yourself today</p>
+            <h3 className="text-lg font-semibold sm:text-xl">Register an account with us</h3>
+            <p className="text-base sm:text-xl sm:w-[35rem]">You want to rent your venue or rent a venue, register yourself today</p>
           </div>
           <div className="w-32">
             <img className="object-cover w-full h-full" src={RegisterImage} alt="user plus" />
