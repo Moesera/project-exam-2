@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function useLogin(url) {
   const [isSuccess, setIsSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(null);
 
   async function login(email, password) {
