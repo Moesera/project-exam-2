@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from "react";
-import { checkAuthAndFetch } from "../../authentication/apiAuth";
 import { getItem } from "../../localStorage/getItem";
 
 /**
