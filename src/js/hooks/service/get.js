@@ -54,14 +54,14 @@ export function useGet(url, offset, limit) {
         setIsError(false);
         let dataResults;
 
-        if (checkAuthAndFetch(url)) {
-          dataResults = await fetch(`${url}?limit=${limit}&offset=${offset}`, options);
-          if(dataResults.errors && dataResults.errors.length > 0) {
-            const errorMessage = data.errors[0].message;
-            throw new Error(errorMessage);
-          }
-        } else {
-          dataResults = await fetch(url);
+          if(offset === undefined) {
+            dataResults = await fetch(url, options);
+            if(dataResults.errors && dataResults.errors.length > 0) {
+              const errorMessage = data.errors[0].message;
+              throw new Error(errorMessage);
+            }
+          } else {
+          dataResults = await fetch(`${url}?limit=${limit}&offset=${offset}`);
           if (!dataResults.ok) {
             throw new Error(dataResults.statusCode);
           }
@@ -79,7 +79,7 @@ export function useGet(url, offset, limit) {
     }
 
     getData();
-  }, [url, options, data.errors, offset]);
+  }, [url, options, data.errors, offset, limit]);
 
   if (data) {
     return { data, isLoading, isError };
