@@ -109,7 +109,7 @@ export default function FilterOptions() {
         </label>
         <label>
           <h2>Guests</h2>
-          <input id="guests" className="w-full border rounded-lg" type="number" min="0" placeholder="0" Value={filters.guests}/>
+          <input id="guests" className="w-full border rounded-lg" type="number" min="0" placeholder="0" inputMode="numeric" defaultValue={filters.guests}/>
         </label>
         <button onClick={setFiltering} type="button" className="p-2 border rounded-lg bg-success">Filter</button>
       </section>
