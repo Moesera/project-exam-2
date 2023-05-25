@@ -93,14 +93,14 @@ function RegisterForm({ setShow }) {
 
   return (
     <div className="flex flex-col justify-center min-h-full my-5">
-      <div className="mx-auto w-4/7">
+      <div className="mx-auto w-4/7 md:w-[60rem]">
         <p onClick={() => setShow(true)} className="mb-4 cursor-pointer">
           Back
         </p>
       </div>
       <h2 className="w-11/12 mx-auto mb-12 text-4xl font-medium text-center">create your account</h2>
       {/* Form start */}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5 mx-auto bg-white w-4/7">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5 mx-auto bg-white w-4/7 md:w-[60rem]">
         <label className="flex flex-col font-inder">
           Username
           <input
@@ -176,8 +176,8 @@ function RegisterForm({ setShow }) {
             <input className="hidden" type="radio" id="manager" name="account-type" value="manager" />
             <div className="flex items-center justify-between w-full px-4 py-2 mt-6 border border-white rounded-xl shadow-3xl hover:cursor-pointer hover:border hover:border-gray">
               <div className="text-left basis-[90%]">
-                <h3 className="text-lg font-semibold">Manager account</h3>
-                <p className="text-base">If you are looking to rent out your real estate, this account is specially made for that purpose.</p>
+                <h3 className="text-lg font-semibold sm:text-xl">Manager account</h3>
+                <p className="text-base sm:text-xl sm:w-[35rem]">If you are looking to rent out your real estate, this account is specially made for that purpose.</p>
               </div>
               <figure className="w-32">
                 <img className="object-cover w-full h-full" src={ManagerIcon} alt="manager" />
@@ -189,8 +189,8 @@ function RegisterForm({ setShow }) {
             <input className="hidden" type="radio" id="customer" name="account-type" value="customer" />
             <div className="box-border flex items-center justify-between w-full px-4 py-2 mt-6 border border-white rounded-xl shadow-3xl hover:cursor-pointer hover:border-gray">
               <div className="text-left basis-[90%]">
-                <h3 className="text-lg font-semibold">Customer account</h3>
-                <p className="text-base">If you are not renting out your real estate, but looking to rent a venue or apartment this is the profile for you.</p>
+                <h3 className="text-lg font-semibold sm:text-xl">Customer account</h3>
+                <p className="text-base sm:text-xl sm:w-[35rem]">If you are not renting out your real estate, but looking to rent a venue or apartment this is the profile for you.</p>
               </div>
               <figure className="w-32">
                 <img className="object-cover w-full h-full" src={CustomerIcon} alt="customer" />

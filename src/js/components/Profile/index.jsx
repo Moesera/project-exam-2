@@ -10,16 +10,11 @@ import ModalPopup from "../Modal";
 function UserProfile({ userData, venuesData, isLoadingVenues, isErrorVenues, setShowUserProfile, user }) {
   const goBack = useGoBack();
   const isModalOpen = useSelector((state) => state.modal?.isOpen);
-  console.log(isModalOpen);
   const dispatch = useDispatch();
 
   function showProfile() {
     setShowUserProfile(false);
   }
-
-  // function editProfile() {
-    
-  // }
 
   return (
     <main className="pt-72 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">

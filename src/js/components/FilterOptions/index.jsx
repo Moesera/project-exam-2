@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../hooks/modal";
 import { setFilters } from "../../hooks/search/search";
 
-
 import WifiIcon from "../../../assets/interface/meta/icons8-wifi-64.png";
 import BreakfastIcon from "../../../assets/interface/meta/icons8-breakfast-64.png";
 import ParkingIcon from "../../../assets/interface/meta/icons8-parking-64.png";
@@ -31,7 +30,11 @@ export default function FilterOptions() {
     const pets = document.getElementById("pets").checked;
     const country = document.querySelector("#country option:checked").value;
     const continent = document.querySelector("#continent option:checked").value;
-    const guests = document.querySelector("#guests").value;
+    let guests = document.querySelector("#guests").value;
+
+    if(guests === "0") {
+      guests = "";
+    }
 
     dispatch(
       setFilters({
@@ -48,9 +51,9 @@ export default function FilterOptions() {
 
   const dispatch = useDispatch();
   return (
-    <div className="w-[95%] mx-auto">
+    <div className="w-[95%] mx-auto mb-2">
       <div className="flex justify-end">
-      <button className="px-2 mt-2 mb-2 font-medium border rounded-lg hover:opacity-90 bg-error" onClick={() => dispatch(closeModal())}>
+      <button className="px-2 mt-2 mb-2 font-medium border rounded-lg md-sm:mt-4 hover:opacity-90 bg-error" onClick={() => dispatch(closeModal())}>
         X
       </button>
       </div>
@@ -106,7 +109,7 @@ export default function FilterOptions() {
         </label>
         <label>
           <h2>Guests</h2>
-          <input id="guests" className="w-full border rounded-lg" type="number" min="0" placeholder="0" defaultValue={filters.guests}/>
+          <input id="guests" className="w-full border rounded-lg" type="number" min="0" placeholder="0" Value={filters.guests}/>
         </label>
         <button onClick={setFiltering} type="button" className="p-2 border rounded-lg bg-success">Filter</button>
       </section>

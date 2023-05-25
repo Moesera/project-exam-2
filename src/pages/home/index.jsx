@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { incrementOffset, resetOffset } from "../../js/hooks/search/offset";
 
 import { useGet } from "../../js/hooks/service/get";
 import { venues } from "../../js/helpers/constant";
@@ -7,8 +8,10 @@ import { venues } from "../../js/helpers/constant";
 import Venues from "../../js/components/Venues";
 
 function Home() {
-
-  const { data, isLoading, isError } = useGet(venues);
+  const dispatch = useDispatch();
+  const limit = 100;
+  const offset = useSelector((state) => state?.offset);
+  const { data, isLoading, isError } = useGet(venues, offset, limit);
   const [originalData, setOriginalData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [searchData, setSearchData] = useState([]);
@@ -22,6 +25,14 @@ function Home() {
       setOriginalData(data);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (Object.values(filters).some((value) => value)) {
+      dispatch(incrementOffset(limit));
+    } else {
+      dispatch(resetOffset());
+    }
+  }, [filters, dispatch]);
 
   useEffect(() => {
     const filteredData = originalData.filter(

@@ -6,15 +6,13 @@ import { openLoginModal } from '../../hooks/loginModal';
 
 import ProfileIcon from "../../../assets/interface/icons8-male-user-64.png";
 
-function ProfileButton({ isLoggedIn }) {
+function ProfileButton({user, isLoggedIn }) {
   
 const dispatch = useDispatch();
 
   useEffect(() => {
     handleUserAuth(dispatch, isLoggedIn);
   });
-
-let user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <div>
