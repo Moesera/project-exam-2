@@ -4,9 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { closeLoginModal, openLoginModal } from "../../js/hooks/loginModal";
 import { setSearchInput } from "../../js/hooks/search/search";
 import { openModal } from "../../js/hooks/modal";
-import { incrementOffset, decrementOffset, resetOffset } from '../../js/hooks/search/offset';
+import { incrementOffset, decrementOffset, resetOffset } from "../../js/hooks/search/offset";
 
-// images
 import SearchIcon from "../../assets/interface/icons8-search-30.png";
 import FilterIcon from "../../assets/interface/icons8-tune-50.png";
 import BookingIcon from "../../assets/interface/icons8-booking-80.png";
@@ -20,6 +19,7 @@ import ModalPopup from "../../js/components/Modal";
 import FilterOptions from "../../js/components/FilterOptions";
 
 function Nav() {
+  const offset = useSelector((state) => state.offset);
   const isLoginModalOpen = useSelector((state) => state.loginModal?.isOpen);
   const isModalOpen = useSelector((state) => state.modal?.isOpen);
   const isLoggedIn = useSelector((state) => state.userAuth?.isLoggedIn);
@@ -32,12 +32,22 @@ function Nav() {
   function handleSearch(e) {
     const input = e.target.value;
     dispatch(setSearchInput(input));
-    
+
     if (input.length > searchInput.length) {
-      dispatch(incrementOffset(100));
-    } else if (input.length < searchInput.length) {
-      dispatch(decrementOffset(100));
-    } else if (input.length > 0) {
+      if(offset === 250) {
+        resetOffset()
+      } else {
+        dispatch(incrementOffset(20));
+      }
+    } 
+    else if (input.length < searchInput.length) {
+      if(offset === 0) {
+        return
+      } else {
+        dispatch(decrementOffset(20));
+      }
+    } 
+    else if(input.length > 0) {
       resetOffset();
     }
   }
@@ -68,21 +78,21 @@ function Nav() {
                 Explore
               </Link>
             </li>
-            {isLoggedIn ?
-            <li className="min-w-[5rem] p-2 hover:cursor-pointer border-b-4 hover:border-gray border-white">
-              <Link onClick={() => dispatch(closeLoginModal())} to={`/profile/${user.name}`} className="flex flex-col items-center text-base">
-                <img className="w-12" src={BookingIcon} alt="bookings img" />
-                Bookings
-              </Link>
-            </li> 
-            :
-            <li className="min-w-[5rem] p-2 hover:cursor-pointer border-b-4 hover:border-gray border-white">
-            <Link onClick={() => dispatch(openLoginModal())} className="flex flex-col items-center text-base">
-              <img className="w-12" src={BookingIcon} alt="bookings img" />
-              Bookings
-            </Link>
-          </li> 
-            }
+            {isLoggedIn ? (
+              <li className="min-w-[5rem] p-2 hover:cursor-pointer border-b-4 hover:border-gray border-white">
+                <Link onClick={() => dispatch(closeLoginModal())} to={`/profile/${user.name}`} className="flex flex-col items-center text-base">
+                  <img className="w-12" src={BookingIcon} alt="bookings img" />
+                  Bookings
+                </Link>
+              </li>
+            ) : (
+              <li className="min-w-[5rem] p-2 hover:cursor-pointer border-b-4 hover:border-gray border-white">
+                <Link onClick={() => dispatch(openLoginModal())} className="flex flex-col items-center text-base">
+                  <img className="w-12" src={BookingIcon} alt="bookings img" />
+                  Bookings
+                </Link>
+              </li>
+            )}
             <ProfileButton user={user} isLoggedIn={isLoggedIn} />
           </ul>
         </nav>

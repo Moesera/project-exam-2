@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { incrementOffset, resetOffset } from "../../js/hooks/search/offset";
+import { updateOffset } from "../../js/hooks/search/offset";
 
 import { useGet } from "../../js/hooks/service/get";
 import { venues } from "../../js/helpers/constant";
@@ -10,7 +10,8 @@ import Venues from "../../js/components/Venues";
 function Home() {
   const dispatch = useDispatch();
   const limit = 100;
-  const offset = useSelector((state) => state?.offset);
+  const offset = useSelector((state) => state.offset);
+  
   const { data, isLoading, isError } = useGet(venues, offset, limit);
   const [originalData, setOriginalData] = useState([]);
   const [filterData, setFilterData] = useState([]);
@@ -19,7 +20,6 @@ function Home() {
   const searchInput = useSelector((state) => state.search?.searchInput);
   const filters = useSelector((state) => state.search?.filters);
 
-
   useEffect(() => {
     if (data) {
       setOriginalData(data);
@@ -27,11 +27,7 @@ function Home() {
   }, [data]);
 
   useEffect(() => {
-    if (Object.values(filters).some((value) => value)) {
-      dispatch(incrementOffset(limit));
-    } else {
-      dispatch(resetOffset());
-    }
+      dispatch(updateOffset(filters));
   }, [filters, dispatch]);
 
   useEffect(() => {
@@ -65,11 +61,11 @@ function Home() {
 
     setSearchData(searchData);
   }, [originalData, searchInput, filterData]);
-
+  
   return (
     <main className="pt-40 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
       <h1 className="sr-only">Homepage</h1>
-      <Venues data={searchData} isLoading={isLoading} isError={isError} />
+      {searchData.length > 0 ? <Venues data={searchData} isLoading={isLoading} isError={isError} /> : <h2 className="text-4xl font-medium text-center">Whoops, no results for your search</h2>}
     </main>
   );
 }
