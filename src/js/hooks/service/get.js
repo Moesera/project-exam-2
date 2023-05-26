@@ -7,7 +7,6 @@ import { getItem } from "../../localStorage/getItem";
  * @returns an response from the API, with data, isLoading, isError.
  * @example
  * ```
- * // imports
  * import { useGet } from "path/hooks/service/get";
  *
  *
