@@ -2,13 +2,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import validator from "validator";
-
 import { useApi } from "../../hooks/service/api";
 import { venues } from "../../helpers/constant";
 
 import SliderComponent from "../Slider";
 import { useParams } from "react-router-dom";
+import { validateUrl } from "../../helpers/validators";
 
 const schema = yup
   .object({
@@ -26,9 +25,9 @@ const schema = yup
   .required();
 
 function EditForm({ setShowForm, venueData }) {
-  const { id } = useParams()
+  const { id } = useParams();
   const [mediaArray, setMediaArray] = useState([...venueData.media]);
-  const { apiData, isSuccess, isLoading, isError, } = useApi(venues + id);
+  const { apiData, isSuccess, isLoading, isError } = useApi(venues + id);
 
   const [urlInput, setUrlInput] = useState("");
   const [urlError, setUrlError] = useState("");
@@ -41,14 +40,6 @@ function EditForm({ setShowForm, venueData }) {
       setUrlError("");
     }
   };
-
-  function validateUrl(url) {
-    if (validator.isURL(url)) {
-      return true;
-    }
-  
-    return false;
-  }
 
   const {
     register,
@@ -63,7 +54,7 @@ function EditForm({ setShowForm, venueData }) {
       return;
     }
     const method = "PUT";
-    const updatedData = {...data, media: mediaArray}
+    const updatedData = { ...data, media: mediaArray };
     apiData(updatedData, method);
     setTimeout(() => {
       goBack();
@@ -74,10 +65,9 @@ function EditForm({ setShowForm, venueData }) {
     setShowForm(false);
   }
 
-  //  adding new images
   const addMedia = () => {
     const mediaInput = document.getElementById("media-input");
-    if(mediaInput) {
+    if (mediaInput) {
       setMediaArray([...mediaArray, mediaInput.value]);
       mediaInput.value = "";
       setUrlInput("");
@@ -90,13 +80,21 @@ function EditForm({ setShowForm, venueData }) {
   };
 
   if (isLoading) {
-    return <div>...loading</div>;
+    return (
+      <div class="flex items-center justify-center min-h-screen p-5 bg-gray-100 min-w-screen">
+        <div class="flex space-x-2 animate-pulse">
+          <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+          <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+          <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+        </div>
+      </div>
+    );
   }
 
   console.log(venueData);
 
   return (
-    <section className="pt-72 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
+    <section className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
       <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
         Back
       </div>
@@ -117,7 +115,14 @@ function EditForm({ setShowForm, venueData }) {
         <div>
           <label className="flex flex-col">
             image - Url
-            <input className="p-2 border rounded-lg" id="media-input" value={urlInput} pattern="/^(https?|ftp):\/\/(-\.)?([^\s/?.#-]+\.?)+(\/[^\s]*)?$/" onChange={handleUrlChange} type="url" />
+            <input
+              className="p-2 border rounded-lg"
+              id="media-input"
+              value={urlInput}
+              pattern="/^(https?|ftp):\/\/(-\.)?([^\s/?.#-]+\.?)+(\/[^\s]*)?$/"
+              onChange={handleUrlChange}
+              type="url"
+            />
             {<p className="error-message">{urlError}</p>}
           </label>
         </div>
