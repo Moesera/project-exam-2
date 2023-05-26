@@ -1,6 +1,16 @@
 import { useState } from "react";
 import { getItem } from "../../localStorage/getItem";
 
+/**
+ * Sends a request to the endpoint, by providing the url.
+ * @param {string} url contains the endpoint you want to reach.
+ * @returns data, isSuccess, isLoading, isError
+ * @example
+ * ```
+ * const { id } = useParams();
+ * const { apiData, isSuccess, isLoading, isError, } = useApi(venues + id);
+ * ```
+ */
 export function useApi(url) {
   const [data, setData] = useState([]);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -9,6 +19,27 @@ export function useApi(url) {
 
   const token = getItem("token");
 
+/**
+ * Sends an api request to the endpoint.
+ * @param {Object} body contains the values you want to send to the api in the body.
+ * @param {String} method contains the method to send to the api.
+ * @returns data results or error from the api endpoint.
+ * @example
+ * ```
+ * function onSubmit(){
+ *  const method = "POST" 
+ *  const body = {
+ *   title: "MyTile",
+ *   body: "Some provided text",
+ *  }
+ * 
+ * apiData(body, method);
+ * }
+ * 
+ * 
+ * 
+ * ```
+ */
   async function apiData(body, method) {
     const options = {
       method: method,
@@ -39,10 +70,10 @@ export function useApi(url) {
         }
       }
 
-      console.log(dataResults);
       const json = await dataResults.json();
 
       setData(json);
+
       if (dataResults.ok) {
         setIsSuccess(true);
       }
