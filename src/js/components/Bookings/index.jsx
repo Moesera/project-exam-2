@@ -45,7 +45,7 @@ function UserBookings({ setActiveComponent, data }) {
   function goBack() {
     setActiveComponent("default");
   }
-console.log(bookingsData);
+
   return (
     <main className="pt-72 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
       <ToastContainer />
