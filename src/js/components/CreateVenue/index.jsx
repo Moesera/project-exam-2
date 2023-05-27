@@ -25,7 +25,7 @@ const schema = yup
   })
   .required();
 
-function CreateVenue({setActiveComponent}) {
+function CreateVenue({ setActiveComponent }) {
   const [mediaArray, setMediaArray] = useState([]);
   const { apiData, isSuccess, isLoading, isError } = useApi(venues);
 
@@ -45,23 +45,22 @@ function CreateVenue({setActiveComponent}) {
     if (validator.isURL(url)) {
       return true;
     }
-  
+
     return false;
   }
 
   const notify = () =>
-  toast.success("Venue was successfully created", {
-    position: "bottom-center",
-    autoClose: 2500,
-    hideProgressBar: true,
-    theme: "colored",
-    closeOnClick: true,
-  });
+    toast.success("Venue was successfully created", {
+      position: "bottom-center",
+      autoClose: 2500,
+      hideProgressBar: true,
+      theme: "colored",
+      closeOnClick: true,
+    });
 
-
-function goBack() {
-  setActiveComponent("default");
-}
+  function goBack() {
+    setActiveComponent("default");
+  }
 
   const {
     register,
@@ -76,38 +75,46 @@ function goBack() {
     if (urlError) {
       return;
     }
-    const method = "POST"
+    const method = "POST";
     notify();
     apiData(data, method);
     reset();
   }
 
-    //  adding new images
-    const addMedia = () => {
-      const mediaInput = document.getElementById("media-input");
-      
-      if(mediaInput) {
-        setMediaArray([...mediaArray, mediaInput.value]);
-        mediaInput.value = "";
-        setUrlInput("");
-        validateUrl(mediaInput.value);
-      }
-    };
-  
-    const removeMedia = (i) => {
-      setMediaArray(mediaArray.filter((media, index) => index !== i));
-    };
+  //  adding new images
+  const addMedia = () => {
+    const mediaInput = document.getElementById("media-input");
+
+    if (mediaInput) {
+      setMediaArray([...mediaArray, mediaInput.value]);
+      mediaInput.value = "";
+      setUrlInput("");
+      validateUrl(mediaInput.value);
+    }
+  };
+
+  const removeMedia = (i) => {
+    setMediaArray(mediaArray.filter((media, index) => index !== i));
+  };
 
   if (isLoading) {
-    return <div>...Loading</div>;
+    return (
+      <div class="flex items-center justify-center min-h-screen p-5 bg-gray-100 min-w-screen">
+        <div class="flex space-x-2 animate-pulse">
+          <div class="w-3 h-3 bg-ocean rounded-full"></div>
+          <div class="w-3 h-3 bg-ocean rounded-full"></div>
+          <div class="w-3 h-3 bg-ocean rounded-full"></div>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <main className="pt-48 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
-        <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
-          Back
-        </div>
-        <ToastContainer />
+    <main className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14 max-w-[550px]">
+      <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
+        Back
+      </div>
+      <ToastContainer />
       <h1 className="w-11/12 mt-10 mb-12 text-4xl font-medium">Create Venue</h1>
       {isError && <p className="error">Error: {isError}</p>}
       {isSuccess && <div className="success">Venue was successfully created</div>}
@@ -123,10 +130,17 @@ function goBack() {
         ))}
       </div>
       <form className="flex flex-col gap-5 mx-auto bg-white font-inder" onSubmit={handleSubmit(onSubmit)}>
-      <div>
+        <div>
           <label className="flex flex-col">
             image - Url
-            <input className="p-2 border rounded-lg" id="media-input" value={urlInput} pattern="/^(https?|ftp):\/\/(-\.)?([^\s/?.#-]+\.?)+(\/[^\s]*)?$/" onChange={handleUrlChange} type="url" />
+            <input
+              className="p-2 border rounded-lg"
+              id="media-input"
+              value={urlInput}
+              pattern="/^(https?|ftp):\/\/(-\.)?([^\s/?.#-]+\.?)+(\/[^\s]*)?$/"
+              onChange={handleUrlChange}
+              type="url"
+            />
             {<p className="error-message">{urlError}</p>}
           </label>
         </div>
@@ -146,7 +160,7 @@ function goBack() {
           <textarea {...register("description")} className="p-2 border rounded-lg" type="text"></textarea>
           <p className="error-message">{errors.description?.message}</p>
         </label>
-        
+
         <label className="flex flex-col">
           price
           <input {...register("price")} className="p-2 border rounded-lg" type="number" />
