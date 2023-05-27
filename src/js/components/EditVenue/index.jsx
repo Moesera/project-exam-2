@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Venues from "../Venues";
 
 function EditVenue({ setActiveComponent, data }) {
@@ -8,6 +9,10 @@ function EditVenue({ setActiveComponent, data }) {
 
   return (
     <main className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
+            <Helmet>
+        <title>Edit your venue | Compasso</title>
+        <meta name="description" content="Edit your rented venue" />
+      </Helmet>
       <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
         Back
       </div>
