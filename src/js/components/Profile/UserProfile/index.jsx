@@ -42,13 +42,6 @@ function UserProfileManager({ userData, venuesData, setShowUserProfile }) {
       return <EditVenue setActiveComponent={setActiveComponent} data={venuesData} />;
     case "bookings":
       return <UserBookings setActiveComponent={setActiveComponent} data={userData.bookings} />;
-    case "support":
-      console.log("support");
-      // ! Create the feedback form
-      // Open a form to contact support. maybe make an editable form where you can
-      // input elements to your own choosing.
-      // code
-      break;
     default:
       return (
         <main className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
