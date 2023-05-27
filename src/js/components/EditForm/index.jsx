@@ -94,7 +94,7 @@ function EditForm({ setShowForm, venueData }) {
   console.log(venueData);
 
   return (
-    <section className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
+    <section className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14 max-w-[550px]">
       <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
         Back
       </div>
@@ -111,7 +111,6 @@ function EditForm({ setShowForm, venueData }) {
         ))}
       </div>
       <form className="flex flex-col gap-5 mx-auto mt-5 bg-white font-inder" onSubmit={handleSubmit(onSubmit)}>
-        {/* Show the images that is already set, and then allow it to continue and add images */}
         <div>
           <label className="flex flex-col">
             image - Url
@@ -209,7 +208,7 @@ function EditForm({ setShowForm, venueData }) {
         </label>
         <input className="p-2 border rounded-lg bg-success hover:cursor-pointer" type="submit" />
         {isError && <p className="mt-2 error">Error: {isError}</p>}
-        {isSuccess && <div className="mt-2 success">Avatar was successfully updated</div>}
+        {isSuccess && <div className="mt-2 success">Venue was successfully updated</div>}
       </form>
     </section>
   );

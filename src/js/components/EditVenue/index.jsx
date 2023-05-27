@@ -7,7 +7,7 @@ function EditVenue({ setActiveComponent, data }) {
   }
 
   return (
-    <main className="pt-48 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
+    <main className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
       <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
         Back
       </div>
