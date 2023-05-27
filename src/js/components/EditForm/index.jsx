@@ -91,8 +91,6 @@ function EditForm({ setShowForm, venueData }) {
     );
   }
 
-  console.log(venueData);
-
   return (
     <section className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14 max-w-[550px]">
       <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
