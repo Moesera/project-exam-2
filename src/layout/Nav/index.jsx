@@ -29,25 +29,28 @@ function Nav() {
   const components = [LoginForm, RegisterForm];
   const [showLogin, setShowLogin] = useState(true);
 
+  /**
+   * This is the search function that launches on change to filter data.
+   * @param {object} e contains the event of the action
+   * @returns sets a search query to the search redux.
+   */
   function handleSearch(e) {
     const input = e.target.value;
     dispatch(setSearchInput(input));
 
     if (input.length > searchInput.length) {
-      if(offset === 250) {
-        resetOffset()
+      if (offset === 250) {
+        resetOffset();
       } else {
         dispatch(incrementOffset(20));
       }
-    } 
-    else if (input.length < searchInput.length) {
-      if(offset === 0) {
-        return
+    } else if (input.length < searchInput.length) {
+      if (offset === 0) {
+        return;
       } else {
         dispatch(decrementOffset(20));
       }
-    } 
-    else if(input.length > 0) {
+    } else if (input.length > 0) {
       resetOffset();
     }
   }
@@ -60,7 +63,9 @@ function Nav() {
       {isLoginModalOpen && <LoginModal show={showLogin} setShow={setShowLogin} components={components} open={isLoginModalOpen} />}
       {/* Search */}
       <section className="flex w-3.5/7 items-center xl:w-desktop gap-3">
-        <input defaultValue={searchInput} onKeyUp={handleSearch} className="pl-20 h-16.5 rounded-full bg-white w-full shadow-3xl" type="text" placeholder="Search venues" />
+        <label className="w-full">
+          <input defaultValue={searchInput} onKeyUp={handleSearch} className="pl-20 h-16.5 rounded-full bg-white w-full shadow-3xl" type="text" placeholder="Search venues" />
+        </label>
         <label className="absolute flex items-center justify-between pl-6 pr-6">
           <Link to="/">
             <img className="w-10" src={SearchIcon} alt="search" />

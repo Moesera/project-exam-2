@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Helmet } from "react-helmet-async";
 import { updateOffset } from "../../js/hooks/search/offset";
 
 import { useGet } from "../../js/hooks/service/get";
@@ -11,25 +12,34 @@ function Home() {
   const dispatch = useDispatch();
   const limit = 100;
   const offset = useSelector((state) => state.offset);
-  
+  const searchInput = useSelector((state) => state.search?.searchInput);
+  const filters = useSelector((state) => state.search?.filters);
+
   const { data, isLoading, isError } = useGet(venues, offset, limit);
   const [originalData, setOriginalData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [searchData, setSearchData] = useState([]);
 
-  const searchInput = useSelector((state) => state.search?.searchInput);
-  const filters = useSelector((state) => state.search?.filters);
-
+  /**
+   * Sets the originalData back to original.
+   * TODO: Maybe use a more updated method where the filtering does not delete original array.
+   */
   useEffect(() => {
     if (data) {
       setOriginalData(data);
     }
   }, [data]);
 
+  /**
+   * Updated offset so it does not change on page render.
+   */
   useEffect(() => {
-      dispatch(updateOffset(filters));
+    dispatch(updateOffset(filters));
   }, [filters, dispatch]);
 
+  /**
+   * Filtering filters that are set by user.
+   */
   useEffect(() => {
     const filteredData = originalData.filter(
       (item) =>
@@ -49,6 +59,9 @@ function Home() {
     setFilterData(filteredData);
   }, [filters, originalData]);
 
+  /**
+   * filtering search query from user.
+   */
   useEffect(() => {
     const searchData = filterData.filter(
       (item) =>
@@ -63,9 +76,13 @@ function Home() {
   }, [originalData, searchInput, filterData]);
   
   return (
-    <main className="pt-40 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
+    <main className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
+      <Helmet>
+        <title>Homepage | Compasso</title>
+        <meta name="description" content="Discover our venues where the renter and who is renting is you" />
+      </Helmet>
       <h1 className="sr-only">Homepage</h1>
-      {searchData.length > 0 ? <Venues data={searchData} isLoading={isLoading} isError={isError} /> : <h2 className="text-4xl font-medium text-center">Whoops, no results for your search</h2>}
+        <Venues data={searchData} isLoading={isLoading} isError={isError} />
     </main>
   );
 }

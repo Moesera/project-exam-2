@@ -1,5 +1,6 @@
 import removeItem from "../../../localStorage/removeItem";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { useGoBack } from "../../../hooks/tools/useGoBack";
 import { useDispatch } from "react-redux";
@@ -10,13 +11,11 @@ import CreateVenue from "../../CreateVenue";
 import EditVenue from "../../EditVenue";
 import UserBookings from "../../Bookings";
 
-// media
 import ArrowRight from "../../../../assets/interface/icons8-chevron-right.png";
 import HouseIcon from "../../../../assets/interface/icons8-home-100.png";
 import EditHouseIcon from "../../../../assets/interface/icons8-home-automation-100.png";
 import EditBookingIcon from "../../../../assets/interface/icons8-schedule-100.png";
 import SupportIcon from "../../../../assets/interface/icons8-technical-support-100.png";
-// import { handleAvatarImgError } from "../../../helpers/placeholder";
 
 function UserProfileManager({ userData, venuesData, setShowUserProfile }) {
   const navigate = useNavigate();
@@ -36,9 +35,6 @@ function UserProfileManager({ userData, venuesData, setShowUserProfile }) {
     dispatch(setIsLoggedIn(false));
   }
 
-  // i set an initial state as showing the cards and everything,
-  // i them make a switch case to set the active content, if the content changes
-  // so does the active content, then have a back button to the initial one.
   switch (activeComponent) {
     case "create":
       return <CreateVenue setActiveComponent={setActiveComponent} />;
@@ -46,15 +42,13 @@ function UserProfileManager({ userData, venuesData, setShowUserProfile }) {
       return <EditVenue setActiveComponent={setActiveComponent} data={venuesData} />;
     case "bookings":
       return <UserBookings setActiveComponent={setActiveComponent} data={userData.bookings} />;
-    case "support":
-      console.log("support");
-      // Open a form to contact support. maybe make an editable form where you can
-      // input elements to your own choosing.
-      // code
-      break;
     default:
       return (
-        <main className="pt-72 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
+        <main className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
+          <Helmet>
+            <title>Profile | Compasso</title>
+            <meta name="description" content={`Manage your venues, bookings on your profile site`} />
+          </Helmet>
           <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
             Back
           </div>

@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { Helmet } from "react-helmet-async";
 import { useGoBack } from "../../hooks/tools/useGoBack";
 import { openModal } from "../../hooks/modal";
 
@@ -17,8 +18,12 @@ function UserProfile({ userData, venuesData, isLoadingVenues, isErrorVenues, set
   }
 
   return (
-    <main className="pt-72 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
-          {isModalOpen && <ModalPopup open={openModal} content={EditProfile}/>}
+    <main className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
+      <Helmet>
+        <title>{userData.name}'s profile | Compasso</title>
+        <meta name="description" content={`Check out ${userData.name}'s profile and his venues`} />
+      </Helmet>
+      {isModalOpen && <ModalPopup open={openModal} content={EditProfile} />}
       {user.name !== userData.name ? (
         <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
           Back
@@ -40,7 +45,9 @@ function UserProfile({ userData, venuesData, isLoadingVenues, isErrorVenues, set
               <img className="object-cover w-full h-full rounded-full" src={userData.avatar} alt={userData.name} onError={handleAvatarImgError} />
             </figure>
             <div className="invisible group-hover/item:visible absolute px-4 py-1 rounded-full top-[28.5%] left-[18%] bg-opacity-80 bg-gray hover:cursor-pointer">
-              <p onClick={() => dispatch(openModal())} className="hover:underline">edit</p>
+              <p onClick={() => dispatch(openModal())} className="hover:underline">
+                edit
+              </p>
             </div>
           </div>
         </div>
