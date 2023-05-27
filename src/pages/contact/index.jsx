@@ -1,6 +1,9 @@
 import { Helmet } from "react-helmet-async";
+import { useGoBack } from "../../js/hooks/tools/useGoBack";
 
 function Contact() {
+const goBack = useGoBack();
+
   return (
     <main class="flex items-center justify-center p-12">
       <Helmet>
@@ -8,6 +11,9 @@ function Contact() {
         <meta name="description" content="Contact us at Compasso to give us feedback and to help solve your issues" />
       </Helmet>
       <div class="mx-auto w-full max-w-[550px]">
+      <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
+        Back
+      </div>
         <h1 className="text-5xl font-medium text-center mb-14">Contact</h1>
         <form className="font-inder" method="POST">
           <div class="mb-5">
