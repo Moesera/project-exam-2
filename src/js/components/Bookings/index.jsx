@@ -52,7 +52,7 @@ function UserBookings({ setActiveComponent, data }) {
       <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
         Back
       </div>
-      <h1 className="py-10 mt-12 text-4xl font-medium">Bookings</h1>
+      <h1 className="py-10 text-4xl font-medium">Bookings</h1>
       {bookingsData.length > 0 ? (
         <section className="flex flex-col gap-4">
           {bookingsData.map((bookings) => (
