@@ -34,6 +34,7 @@ function UserProfile({ userData, venuesData, isLoadingVenues, isErrorVenues, set
         </div>
       )}
       <h1 className="text-5xl font-medium mt-14">Profile</h1>
+
       {user.name !== userData.name ? (
         <figure className="w-[6rem] h-[6rem] md-sm:w-[9rem] md-sm:h-[9rem] mt-14">
           <img className="object-cover w-full h-full rounded-full" src={userData.avatar} alt={userData.name} onError={handleAvatarImgError} />
@@ -57,7 +58,13 @@ function UserProfile({ userData, venuesData, isLoadingVenues, isErrorVenues, set
         <p>Email: {userData.email}</p>
         <p>Status: {userData.venueManager ? <span className="font-bold text-ocean">Renter</span> : <span className="font-bold text-ocean">Vacationist</span>}</p>
       </div>
-      {venuesData.length < 1 ? <div className="mt-4">Currently no rented venues</div> : <Venues data={venuesData} isLoading={isLoadingVenues} isError={isErrorVenues} />}
+      {userData.venueManager && (
+    venuesData.length < 1 ? (
+    <div className="mt-4">Currently no rented venues</div>
+  ) : (
+    <Venues data={venuesData} isLoading={isLoadingVenues} isError={isErrorVenues} />
+  )
+)}
     </main>
   );
 }
