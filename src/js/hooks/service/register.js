@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function useRegister(url) {
   const [isSuccess, setIsSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(null);
 
   async function register(options) {
@@ -36,7 +36,6 @@ function useRegister(url) {
       return data;
     } catch (error) {
       setIsError(error.message);
-      console.log(error);
     } finally {
       setIsLoading(false);
     }

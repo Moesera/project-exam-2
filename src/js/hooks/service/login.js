@@ -43,7 +43,6 @@ function useLogin(url) {
       }
     } catch (error) {
       setIsError(error.message);
-      console.log(error);
     } finally {
       setIsLoading(false);
     }
