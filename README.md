@@ -1,4 +1,6 @@
 # Project Exam 2 - Compasso
+![image](https://github.com/Sigvel/project-exam-2/assets/89355439/8388db5d-2602-4967-b336-863c3171638a)
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ee343970-20ad-49ce-8f94-2e001d0cc892/deploy-status)](https://app.netlify.com/sites/compasso-site/deploys)
 ## Getting started
 
