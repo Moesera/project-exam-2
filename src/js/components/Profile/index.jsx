@@ -44,8 +44,8 @@ function UserProfile({ userData, venuesData, isLoadingVenues, isErrorVenues, set
             <figure className="w-[6rem] h-[6rem] md-sm:w-[9rem] md-sm:h-[9rem] mt-14 group/edit">
               <img className="object-cover w-full h-full rounded-full" src={userData.avatar} alt={userData.name} onError={handleAvatarImgError} />
             </figure>
-            <div className="invisible group-hover/item:visible absolute px-4 py-1 rounded-full top-[28.5%] left-[18%] bg-opacity-80 bg-gray hover:cursor-pointer">
-              <p onClick={() => dispatch(openModal())} className="hover:underline">
+            <div className="lg:invisible lg:group-hover/item:visible relative text-center bottom-[8rem] left-[3.5rem] md-sm:bottom-[10rem] md-sm:left-[6rem] ">
+              <p onClick={() => dispatch(openModal())} className="py-1 w-20 rounded-full hover:underline bg-opacity-80 bg-gray hover:cursor-pointer">
                 edit
               </p>
             </div>
