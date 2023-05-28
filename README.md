@@ -1,5 +1,5 @@
 # Project Exam 2 - Compasso
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ee343970-20ad-49ce-8f94-2e001d0cc892/deploy-status)](https://app.netlify.com/sites/compasso-site/deploys)
 ## Getting started
 
 ### **Installing**
