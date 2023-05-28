@@ -45,7 +45,7 @@ function RegisterForm({ setShow }) {
 
     setTimeout(() => {
       setShow(true);
-    }, 3000);
+    }, 2000);
   }, [setShow]);
 
   useEffect(() => {
@@ -119,7 +119,7 @@ function RegisterForm({ setShow }) {
         </label>
         <label className="flex flex-col font-inder">
           Email
-          <input className="p-2 border rounded-lg" type="email" value={email} onChange={(event) => setEmail(event.target.value)} pattern="/^[a-zA-Z0-9._%+-]+@stud.noroff.no$/" required />
+          <input className="p-2 border rounded-lg" type="email" value={email} onChange={(event) => setEmail(event.target.value)} pattern="^[a-zA-Z0-9._%+-]+@stud.noroff.no$" required />
         </label>
         <label className="flex flex-col font-inder">
           Password
