@@ -21,7 +21,6 @@ const url = register;
  * @returns successful registered user or error
  */
 function RegisterForm({ setShow }) {
-
   const [count, setCount] = useState(0);
   const avatarContainerRef = useRef(null);
   const [isHidden, setIsHidden] = useState(true);
@@ -65,7 +64,9 @@ function RegisterForm({ setShow }) {
   }
 
   function handleAvatarChange() {
-    const avatarRadioButtons = avatarContainerRef.current.querySelectorAll(`input[type="radio"][name="avatar"]`);
+    const avatarRadioButtons = avatarContainerRef.current.querySelectorAll(
+      `input[type="radio"][name="avatar"]`
+    );
     let chosenAvatarValue;
     avatarRadioButtons.forEach((radioButton) => {
       if (radioButton.checked) {
@@ -75,16 +76,24 @@ function RegisterForm({ setShow }) {
     setChosenAvatar(chosenAvatarValue);
   }
 
+  function handleUserTypeChange(event) {
+    if (event.target.value === "manager") {
+      return setIsManager(true);
+    }
+
+    return setIsManager(false)
+  }
+
   function setHidden() {
     setIsHidden(!isHidden);
   }
 
+  // account type does not change,
+  // need to create something that changes it
+  // and keeps up with the state before registering
   function handleSubmit(e) {
     e.preventDefault();
 
-    const form = e.target;
-    const managerRadio = form.elements["manager"];
-    setIsManager(managerRadio.checked);
     const options = {
       name: username,
       email: email,
@@ -92,6 +101,7 @@ function RegisterForm({ setShow }) {
       avatar: chosenAvatar,
       venueManager: isManager,
     };
+
     register(options);
   }
 
@@ -102,9 +112,14 @@ function RegisterForm({ setShow }) {
           Back
         </p>
       </div>
-      <h2 className="w-11/12 mx-auto mb-12 text-4xl font-medium text-center">create your account</h2>
+      <h2 className="w-11/12 mx-auto mb-12 text-4xl font-medium text-center">
+        create your account
+      </h2>
       {/* Form start */}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5 mx-auto bg-white w-4/7 md:w-[60rem]">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-5 mx-auto bg-white w-4/7 md:w-[60rem]"
+      >
         <label className="flex flex-col font-inder">
           Username
           <input
@@ -119,7 +134,14 @@ function RegisterForm({ setShow }) {
         </label>
         <label className="flex flex-col font-inder">
           Email
-          <input className="p-2 border rounded-lg" type="email" value={email} onChange={(event) => setEmail(event.target.value)} pattern="^[a-zA-Z0-9._%+-]+@stud.noroff.no$" required />
+          <input
+            className="p-2 border rounded-lg"
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            pattern="^[a-zA-Z0-9._%+-]+@stud.noroff.no$"
+            required
+          />
         </label>
         <label className="flex flex-col font-inder">
           Password
@@ -136,25 +158,57 @@ function RegisterForm({ setShow }) {
         {/* Avatar */}
         <div className="flex flex-col font-inder">
           Avatar
-          <div id="avatarContainer" ref={avatarContainerRef} className="flex gap-4" onChange={handleAvatarChange}>
+          <div
+            id="avatarContainer"
+            ref={avatarContainerRef}
+            className="flex gap-4"
+            onChange={handleAvatarChange}
+          >
             <label>
-              <input className="hidden" type="radio" id="preset" name="avatar" value={AvatarPlaceholder} />
+              <input
+                className="hidden"
+                type="radio"
+                id="preset"
+                name="avatar"
+                value={AvatarPlaceholder}
+              />
               <figure className="w-20 h-20 p-2 rounded-lg shadow-3xl hover:cursor-pointer hover:border hover:border-gray">
-                <img className="object-cover w-full h-full" src={AvatarPlaceholder} alt="placeholder" pattern="^(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?$" />
+                <img
+                  className="object-cover w-full h-full"
+                  src={AvatarPlaceholder}
+                  alt="placeholder"
+                  pattern="^(https?|ftp):\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?$"
+                />
               </figure>
             </label>
-            <NewAvatar avatars={avatars} setAvatars={setAvatars} count={count} setCount={setCount} />
+            <NewAvatar
+              avatars={avatars}
+              setAvatars={setAvatars}
+              count={count}
+              setCount={setCount}
+            />
             {/*  */}
             {/* Add image button */}
-            <button onClick={setHidden} id="addAvatar" type="button" className={`w-20 p-2 rounded-lg shadow-3xl hover:border hover:border-gray transition-opacity duration-300`}>
-              <img className="object-cover w-full h-full transition-opacity duration-300" src={isHidden ? AddIcon : CancelIcon} alt="add" />
+            <button
+              onClick={setHidden}
+              id="addAvatar"
+              type="button"
+              className={`w-20 p-2 rounded-lg shadow-3xl hover:border hover:border-gray transition-opacity duration-300`}
+            >
+              <img
+                className="object-cover w-full h-full transition-opacity duration-300"
+                src={isHidden ? AddIcon : CancelIcon}
+                alt="add"
+              />
             </button>
             {/* End of image button */}
           </div>
           <label className="flex gap-4 mt-2">
             <input
               id="imageUrl"
-              className={`w-full p-2 border rounded-lg transition-opacity duration-300 ${isHidden ? "opacity-0" : "opacity-100"}`}
+              className={`w-full p-2 border rounded-lg transition-opacity duration-300 ${
+                isHidden ? "opacity-0" : "opacity-100"
+              }`}
               type="url"
               placeholder="enter your jpg url"
               value={imageUrl}
@@ -177,36 +231,74 @@ function RegisterForm({ setShow }) {
         <div className="flex flex-col font-inder">
           Choose your account type
           <label>
-            <input className="hidden" type="radio" id="manager" name="account-type" value="manager" />
+            <input
+              className="hidden"
+              type="radio"
+              id="manager"
+              name="account-type"
+              value="manager"
+              onChange={handleUserTypeChange}
+            />
             <div className="flex items-center justify-between w-full px-4 py-2 mt-6 border border-white rounded-xl shadow-3xl hover:cursor-pointer hover:border hover:border-gray">
               <div className="text-left basis-[90%]">
-                <h3 className="text-lg font-semibold sm:text-xl">Manager account</h3>
-                <p className="text-base sm:text-xl sm:w-[35rem]">If you are looking to rent out your real estate, this account is specially made for that purpose.</p>
+                <h3 className="text-lg font-semibold sm:text-xl">
+                  Manager account
+                </h3>
+                <p className="text-base sm:text-xl sm:w-[35rem]">
+                  If you are looking to rent out your real estate, this account
+                  is specially made for that purpose.
+                </p>
               </div>
               <figure className="w-32">
-                <img className="object-cover w-full h-full" src={ManagerIcon} alt="manager" />
+                <img
+                  className="object-cover w-full h-full"
+                  src={ManagerIcon}
+                  alt="manager"
+                />
               </figure>
             </div>
           </label>
           {/*  */}
           <label>
-            <input className="hidden" type="radio" id="customer" name="account-type" value="customer" />
+            <input
+              className="hidden"
+              type="radio"
+              id="customer"
+              name="account-type"
+              value="customer"
+              onChange={handleUserTypeChange}
+            />
             <div className="box-border flex items-center justify-between w-full px-4 py-2 mt-6 border border-white rounded-xl shadow-3xl hover:cursor-pointer hover:border-gray">
               <div className="text-left basis-[90%]">
-                <h3 className="text-lg font-semibold sm:text-xl">Customer account</h3>
-                <p className="text-base sm:text-xl sm:w-[35rem]">If you are not renting out your real estate, but looking to rent a venue or apartment this is the profile for you.</p>
+                <h3 className="text-lg font-semibold sm:text-xl">
+                  Customer account
+                </h3>
+                <p className="text-base sm:text-xl sm:w-[35rem]">
+                  If you are not renting out your real estate, but looking to
+                  rent a venue or apartment this is the profile for you.
+                </p>
               </div>
               <figure className="w-32">
-                <img className="object-cover w-full h-full" src={CustomerIcon} alt="customer" />
+                <img
+                  className="object-cover w-full h-full"
+                  src={CustomerIcon}
+                  alt="customer"
+                />
               </figure>
             </div>
           </label>
         </div>
-        <button className="p-2 border rounded-lg bg-success" type="submit" disabled={isLoading}>
+        <button
+          className="p-2 border rounded-lg bg-success"
+          type="submit"
+          disabled={isLoading}
+        >
           Register
         </button>
         {isError && <p className="error">Error: {isError}</p>}
-        {isSuccess && <div className="success">Account was successfully created</div>}
+        {isSuccess && (
+          <div className="success">Account was successfully created</div>
+        )}
       </form>
     </div>
   );
