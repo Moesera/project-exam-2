@@ -62,7 +62,7 @@ function Nav() {
       {isModalOpen && <ModalPopup open={isModalOpen} searchInput={searchInput} content={FilterOptions} />}
       {isLoginModalOpen && <LoginModal show={showLogin} setShow={setShowLogin} components={components} open={isLoginModalOpen} />}
       {/* Search */}
-      <section className="flex w-3.5/7 items-center xl:w-desktop gap-3">
+      <section className="flex w-3.5/7 items-center xl:w-desktop">
         <label className="w-full">
           <input defaultValue={searchInput} onKeyUp={handleSearch} className="pl-20 h-16.5 rounded-full bg-white w-full shadow-3xl" type="text" placeholder="Search venues" />
         </label>
@@ -71,8 +71,10 @@ function Nav() {
             <img className="w-10" src={SearchIcon} alt="search" />
           </Link>
         </label>
-        <div onClick={() => dispatch(openModal())} className="absolute p-2 border rounded-full right-[12%] hover:shadow-inner hover:cursor-pointer md:right-[38%] xl:static">
-          <img className="w-9 xl:w-14" src={FilterIcon} alt="filter" />
+        <div onClick={() => dispatch(openModal())} className="relative flex items-center">
+          <figure className="absolute w-14 border rounded-full p-2 right-4 hover:shadow-inner hover:cursor-pointer">
+          <img src={FilterIcon} alt="filter" />
+        </figure>
         </div>
         {/* Navbar */}
         <nav className="fixed inset-x-0 bottom-0 flex self-center justify-center p-4 bg-white border md:static md:w-2/4 md:p-0 md:border-none border-light-gray font-inder">
