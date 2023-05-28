@@ -15,7 +15,11 @@ function increment({ setCount, count }) {
 }
 
 const url = register;
-
+/**
+ * registers an user
+ * @param {useState} param0 contains the setState of showing the login form
+ * @returns successful registered user or error
+ */
 function RegisterForm({ setShow }) {
 
   const [count, setCount] = useState(0);
@@ -115,7 +119,7 @@ function RegisterForm({ setShow }) {
         </label>
         <label className="flex flex-col font-inder">
           Email
-          <input className="p-2 border rounded-lg" type="email" value={email} onChange={(event) => setEmail(event.target.value)} pattern="^[\w\-.]+@(stud.)?noroff.no$" required />
+          <input className="p-2 border rounded-lg" type="email" value={email} onChange={(event) => setEmail(event.target.value)} pattern="/^[a-zA-Z0-9._%+-]+@stud.noroff.no$/" required />
         </label>
         <label className="flex flex-col font-inder">
           Password
