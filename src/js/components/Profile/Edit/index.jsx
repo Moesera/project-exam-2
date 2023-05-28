@@ -67,7 +67,13 @@ export default function EditProfile() {
 
   if(isLoading) {
     return (
-      <div>...loading</div>
+      <div class="flex items-center justify-center p-5 bg-gray-100">
+      <div class="flex space-x-2 animate-pulse">
+        <div class="w-3 h-3 bg-ocean rounded-full"></div>
+        <div class="w-3 h-3 bg-ocean rounded-full"></div>
+        <div class="w-3 h-3 bg-ocean rounded-full"></div>
+      </div>
+    </div>
     )
   }
 
