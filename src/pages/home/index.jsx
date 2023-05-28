@@ -78,7 +78,7 @@ function Home() {
   return (
     <main className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
       <Helmet>
-        <title>Homepage | Compasso</title>
+        <title>Homepage | Holidaze</title>
         <meta name="description" content="Discover our venues where the renter and who is renting is you" />
       </Helmet>
       <h1 className="sr-only">Homepage</h1>

@@ -29,7 +29,7 @@ function Details() {
     return (
       <main>
         <Helmet>
-          <title>{data.name} | Compasso</title>
+          <title>{data.name} | Holidaze</title>
           <meta name="description" content={`Visit ${data.owner.name}'s venue ${data.name}`} />
         </Helmet>
         <h1>{data.name}</h1>

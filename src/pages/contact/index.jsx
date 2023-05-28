@@ -37,8 +37,8 @@ const goBack = useGoBack();
   return (
     <main class="flex items-center justify-center p-12">
       <Helmet>
-        <title>Contact | Compasso</title>
-        <meta name="description" content="Contact us at Compasso to give us feedback and to help solve your issues" />
+        <title>Contact | Holidaze</title>
+        <meta name="description" content="Contact us at Holidaze to give us feedback and to help solve your issues" />
       </Helmet>
       <div class="mx-auto w-full max-w-[550px]">
       <div className="hover:underline hover:cursor-pointer" onClick={goBack}>

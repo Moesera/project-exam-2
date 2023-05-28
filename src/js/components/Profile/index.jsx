@@ -20,8 +20,8 @@ function UserProfile({ userData, venuesData, isLoadingVenues, isErrorVenues, set
   return (
     <main className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
       <Helmet>
-        <title>{userData.name}'s profile | Compasso</title>
-        <meta name="description" content={`Check out ${userData.name}'s profile and his venues`} />
+        <title>{userData.name}'s profile | Holidaze</title>
+        <meta name="description" content={`Check out ${userData.name}'s profile and venues`} />
       </Helmet>
       {isModalOpen && <ModalPopup open={openModal} content={EditProfile} />}
       {user.name !== userData.name ? (

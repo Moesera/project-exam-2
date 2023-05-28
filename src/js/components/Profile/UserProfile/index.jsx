@@ -46,7 +46,7 @@ function UserProfileManager({ userData, venuesData, setShowUserProfile }) {
       return (
         <main className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
           <Helmet>
-            <title>Profile | Compasso</title>
+            <title>Profile | Holidaze</title>
             <meta name="description" content={`Manage your venues, bookings on your profile site`} />
           </Helmet>
           <div className="hover:underline hover:cursor-pointer" onClick={goBack}>

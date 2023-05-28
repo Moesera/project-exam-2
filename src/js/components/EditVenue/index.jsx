@@ -10,8 +10,8 @@ function EditVenue({ setActiveComponent, data }) {
   return (
     <main className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
             <Helmet>
-        <title>Edit your venue | Compasso</title>
-        <meta name="description" content="Edit your rented venue" />
+        <title>Edit your venue | Holidaze</title>
+        <meta name="description" content="Edit your rented venue at" />
       </Helmet>
       <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
         Back

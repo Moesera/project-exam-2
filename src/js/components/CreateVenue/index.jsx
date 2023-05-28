@@ -113,7 +113,7 @@ function CreateVenue({ setActiveComponent }) {
   return (
     <main className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14 max-w-[550px]">
       <Helmet>
-        <title>Create Venue | Compasso</title>
+        <title>Create Venue | Holidaze</title>
         <meta name="description" content="Create the listing for the venue you want to rent out" />
       </Helmet>
       <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
