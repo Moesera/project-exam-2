@@ -6,8 +6,8 @@ function Footer() {
     <footer class="p-5 pb-[15rem] bg-white shadow-3xl md:px-6 md:py-8 dark:bg-gray-800">
       <div class="sm:flex sm:items-center sm:justify-between">
         <p class="flex items-center mb-4 sm:mb-0">
-          <img src={CompassLogo} class="mr-4 h-14 w-14" alt="Compasso Logo" />
-          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Compasso</span>
+          <img src={CompassLogo} class="mr-4 h-14 w-14" alt="Holidaze Logo" />
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Holidaze</span>
         </p>
         <ul class="flex flex-wrap items-center mb-6 sm:mb-0">
           <li>
