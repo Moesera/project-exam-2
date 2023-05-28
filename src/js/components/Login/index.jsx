@@ -18,7 +18,7 @@ function LoginForm({ setShow }) {
   const resetForm = useCallback(() => {
     setTimeout(() => {
       dispatch(closeLoginModal());
-    }, 3500);
+    }, 2000);
   }, [dispatch]);
 
   useEffect(() => {
