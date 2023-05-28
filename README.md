@@ -40,6 +40,10 @@ John-doe@stud.noroff.no
 
 Rest of the errors in the form should guide you in the right direction.
 
+If you want to test the website without creating a user:
+Email: TheManager@stud.noroff.no
+Pass: 1235678
+
 ## About
 ### **project**
 This is a website for renting and booking venues. you can rent out your venue, check out the users that is renting out their venue, and you can book a venue for a specific date.
@@ -50,7 +54,7 @@ This is a website for renting and booking venues. you can rent out your venue, c
 - Tailwind CSS
 - Redux
 
-## Creator Contact
+## Contact
 
 ### **Social**
 --> [LinkedIn](https://www.linkedin.com/in/sigvel/)
