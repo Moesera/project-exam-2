@@ -72,12 +72,12 @@ function Nav() {
           </Link>
         </label>
         <div onClick={() => dispatch(openModal())} className="relative flex items-center">
-          <figure className="absolute w-14 border rounded-full p-2 right-4 hover:shadow-inner hover:cursor-pointer">
+          <figure className="absolute p-2 border rounded-full w-14 right-4 hover:shadow-inner hover:cursor-pointer">
           <img src={FilterIcon} alt="filter" />
         </figure>
         </div>
         {/* Navbar */}
-        <nav className="fixed inset-x-0 bottom-0 flex self-center justify-center p-4 bg-white border md:static md:w-2/4 md:p-0 md:border-none border-light-gray font-inder">
+        <nav className="fixed inset-x-0 bottom-0 flex self-center justify-center p-4 bg-white border md:static md:w-2/4 md:p-0 md:border-none md:ml-1 border-light-gray font-inder">
           <ul className="flex justify-between w-11/12 m-auto md:gap-4 md:justify-end x-sm:w-3/7 sm:w-3/5 md:w-full lg:gap-8">
             <li className="min-w-[5rem] p-2 hover:cursor-pointer border-b-4 hover:border-gray border-white">
               <Link onClick={() => dispatch(closeLoginModal())} to="/" className="flex flex-col items-center text-base">
