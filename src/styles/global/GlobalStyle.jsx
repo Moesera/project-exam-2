@@ -24,6 +24,11 @@ const GlobalStyle = createGlobalStyle`
   *::after {
     box-sizing: border-box;
   }
+
+  input {
+    background: white;
+    color: black;
+  }
   
   * {
     margin: 0;
