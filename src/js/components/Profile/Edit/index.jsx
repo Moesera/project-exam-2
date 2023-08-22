@@ -31,7 +31,6 @@ export default function EditProfile() {
     const data = { avatar: chosenAvatar };
     const method = "PUT";
 
-    // // notify();
     apiData(data, method);
   }
 
