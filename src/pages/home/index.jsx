@@ -78,8 +78,9 @@ function Home() {
   return (
     <main className="pt-60 bg-[#FDFDFD] w-3.5/7 mx-auto xl:w-desktop mb-14">
       <Helmet>
-        <title>Homepage | Holidaze</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="Discover our venues where the renter and who is renting is you" />
+        <title>Homepage | Holidaze</title>
       </Helmet>
       <h1 className="sr-only">Homepage</h1>
         <Venues data={searchData} isLoading={isLoading} isError={isError} />

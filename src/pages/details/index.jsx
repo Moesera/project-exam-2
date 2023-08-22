@@ -29,8 +29,9 @@ function Details() {
     return (
       <main>
         <Helmet>
-          <title>{data.name} | Holidaze</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta name="description" content={`Visit ${data.owner.name}'s venue ${data.name}`} />
+          <title>{data.name} | Holidaze</title>
         </Helmet>
         <h1>{data.name}</h1>
         <Venue venueData={data} />
