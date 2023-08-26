@@ -15,10 +15,6 @@ const GlobalStyle = createGlobalStyle`
     height: 100vh;
   }
   
-  html {
-    color-scheme: dark light;
-  }
-  
   *,
   *::before,
   *::after {
