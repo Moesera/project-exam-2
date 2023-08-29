@@ -35,10 +35,10 @@ function Contact() {
 const goBack = useGoBack();
 
   return (
-    <main class="flex items-center justify-center p-12">
+    <main className="flex items-center justify-center p-12">
       <Helmet>
-        <title>Contact | Holidaze</title>
         <meta name="description" content="Contact us at Holidaze to give us feedback and to help solve your issues" />
+        <title>Contact | Holidaze</title>
       </Helmet>
       <div class="mx-auto w-full max-w-[550px]">
       <div className="hover:underline hover:cursor-pointer" onClick={goBack}>
@@ -46,29 +46,29 @@ const goBack = useGoBack();
       </div>
         <h1 className="text-5xl font-medium text-center mb-14">Contact</h1>
         <form className="font-inder" onSubmit={handleSubmit(onSubmit)}>
-          <div class="mb-5">
-            <label for="name" p-2 class="mb-3 block font-medium">
+          <div className="mb-5">
+            <label for="name" p-2 className="block mb-3 font-medium">
               Full Name
             </label>
             <input {...register("name")} type="text" name="name" id="name" placeholder="Full Name" class="w-full p-2 border rounded-lg outline-none focus:border-ocean focus:shadow-md" />
             <p className="error-message">{errors.name?.message}</p>
           </div>
-          <div class="mb-5">
-            <label for="email" class="mb-3 block font-medium ">
+          <div className="mb-5">
+            <label for="email" className="block mb-3 font-medium ">
               Email Address
             </label>
             <input {...register("email")} type="email" name="email" id="email" placeholder="example@domain.com" class="w-full p-2 border rounded-lg outline-none focus:border-ocean focus:shadow-md" />
             <p className="error-message">{errors.email?.message}</p>
           </div>
-          <div class="mb-5">
-            <label for="subject" class="mb-3 block font-medium">
+          <div className="mb-5">
+            <label for="subject" className="block mb-3 font-medium">
               Subject
             </label>
             <input {...register("subject")}  type="text" name="subject" id="subject" placeholder="Enter your subject" class="w-full p-2 border rounded-lg outline-none focus:border-ocean focus:shadow-md" />
             <p className="error-message">{errors.subject?.message}</p>
           </div>
-          <div class="mb-5">
-            <label for="message" class="mb-3 block font-medium">
+          <div className="mb-5">
+            <label for="message" className="block mb-3 font-medium">
               Message
             </label>
             <textarea {...register("message")}
@@ -76,12 +76,12 @@ const goBack = useGoBack();
               name="message"
               id="message"
               placeholder="Type your message"
-              class="p-2 rounded-lg w-full resize-none border bg-white font-medium outline-none focus:border-ocean focus:shadow-md"
+              className="w-full p-2 font-medium bg-white border rounded-lg outline-none resize-none focus:border-ocean focus:shadow-md"
             ></textarea>
             <p className="error-message">{errors.message?.message}</p>
           </div>
           <div>
-            <button class="hover:shadow-form p-2 border rounded-lg bg-success disabled:bg-gray outline-none">Submit</button>
+            <button className="p-2 border rounded-lg outline-none hover:shadow-form bg-success disabled:bg-gray">Submit</button>
           </div>
           {isSuccess && <div className="mt-2 success">Message was successfully sent</div>}
         </form>

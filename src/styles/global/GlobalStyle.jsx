@@ -15,14 +15,15 @@ const GlobalStyle = createGlobalStyle`
     height: 100vh;
   }
   
-  html {
-    color-scheme: dark light;
-  }
-  
   *,
   *::before,
   *::after {
     box-sizing: border-box;
+  }
+
+  input {
+    background: white;
+    color: black;
   }
   
   * {

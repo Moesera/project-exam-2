@@ -31,7 +31,6 @@ export default function EditProfile() {
     const data = { avatar: chosenAvatar };
     const method = "PUT";
 
-    // // notify();
     apiData(data, method);
   }
 
@@ -43,6 +42,9 @@ export default function EditProfile() {
     setIsHidden(!isHidden);
   }
 
+  /**
+   * adds an image to the avatar selection
+   */
   function addImage() {
     // This is the new avatar image from the url input
     const newAvatar = imageUrl;
@@ -53,6 +55,9 @@ export default function EditProfile() {
     setImageUrl("");
   }
 
+  /**
+   * handle the user action to switch user avatar.
+   */
   function handleAvatarChange() {
     const avatarRadioButtons = avatarContainerRef.current.querySelectorAll(
       `input[type="radio"][name="avatar"]`

@@ -140,6 +140,7 @@ function RegisterForm({ setShow }) {
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             pattern="^[a-zA-Z0-9._%+-]+@stud.noroff.no$"
+            autoComplete="email"
             required
           />
         </label>
