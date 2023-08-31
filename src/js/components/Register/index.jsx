@@ -15,9 +15,10 @@ function increment({ setCount, count }) {
 }
 
 const url = register;
+
 /**
  * registers an user
- * @param {useState} param0 contains the setState of showing the login form
+ * @param {useState} param contains the setState of showing the login form
  * @returns successful registered user or error
  */
 function RegisterForm({ setShow }) {
